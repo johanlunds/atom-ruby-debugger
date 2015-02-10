@@ -6,7 +6,7 @@
   "activationCommands": {
     "atom-workspace": "ruby-debugger:toggle"
   },
-  "repository": "https://github.com/atom/ruby-debugger",
+  "repository": "https://github.com/johanlunds/ruby-debugger",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
