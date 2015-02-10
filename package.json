@@ -1,0 +1,16 @@
+{
+  "name": "ruby-debugger",
+  "main": "./lib/ruby-debugger",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "activationCommands": {
+    "atom-workspace": "ruby-debugger:toggle"
+  },
+  "repository": "https://github.com/atom/ruby-debugger",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}
