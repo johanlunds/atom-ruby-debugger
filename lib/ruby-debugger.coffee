@@ -1,5 +1,5 @@
 RubyDebuggerView = require './ruby-debugger-view'
-{CompositeDisposable} = require 'atom'
+{CompositeDisposable, Task} = require 'atom'
 
 module.exports = RubyDebugger =
   rubyDebuggerView: null
@@ -8,7 +8,7 @@ module.exports = RubyDebugger =
 
   activate: (state) ->
     @rubyDebuggerView = new RubyDebuggerView(state.rubyDebuggerViewState)
-    @modalPanel = atom.workspace.addModalPanel(item: @rubyDebuggerView.getElement(), visible: false)
+    @modalPanel = atom.workspace.addBottomPanel(item: @rubyDebuggerView.getElement(), visible: false)
 
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable
