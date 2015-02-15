@@ -16,6 +16,7 @@ A short description of your package.
 * Trello board: https://trello.com/b/M3yhQM2b
 * see pics of Chrome debugger and RubyMine for reference
 
+```
 function! RubyDebugger.receive_command() dict
   let file_contents = join(readfile(s:tmp_file), "")
   call s:log("Received command: " . file_contents)
@@ -49,10 +50,14 @@ function! RubyDebugger.receive_command() dict
   endfor
   call g:RubyDebugger.queue.after_hook()
   call g:RubyDebugger.queue.execute()
+```
   
-  
-  rdebug-vim --file /Users/johan_lunds/.janus/vim-ruby-debugger/tmp/ruby_debugger --output /Users/johan_lunds/.janus/vim-ruby-debugger/tmp/ruby_debugger_output --socket /var/folders/8s/vjkdryl91yx0m9lvgc1ykhqw0000gn/T/v1MiKsq/2 --logger_file /Users/johan_lunds/.janus/vim-ruby-debugger/tmp/ruby_debugger_log --debug_mode 1 --vim_executable mvim --vim_servername VIM --separator ++vim-ruby-debugger-separator++ -- '/Users/johan_lunds/Documents/Kod/apoex2/script/rails' server
+```
+rdebug-vim --file /Users/johan_lunds/.janus/vim-ruby-debugger/tmp/ruby_debugger --output /Users/johan_lunds/.janus/vim-ruby-debugger/tmp/ruby_debugger_output --socket /var/folders/8s/vjkdryl91yx0m9lvgc1ykhqw0000gn/T/v1MiKsq/2 --logger_file /Users/johan_lunds/.janus/vim-ruby-debugger/tmp/ruby_debugger_log --debug_mode 1 --vim_executable mvim --vim_servername VIM --separator ++vim-ruby-debugger-separator++ -- '/Users/johan_lunds/Documents/Kod/apoex2/script/rails' server
+```
   
 https://github.com/astashov/vim-ruby-debugger/blob/master/src/ruby_debugger/commands.vim
 
+```
 rdebug-ide --debug --disable-int-handler --evaluation-timeout 10 --rubymine-protocol-extensions --port 61513 --dispatcher-port 61514 -- /Users/johan_lunds/Documents/Kod/apoex2/script/rails server -b 0.0.0.0 -p 3000 -e development
+```
