@@ -61,3 +61,24 @@ https://github.com/astashov/vim-ruby-debugger/blob/master/src/ruby_debugger/comm
 ```
 rdebug-ide --debug --disable-int-handler --evaluation-timeout 10 --rubymine-protocol-extensions --port 61513 --dispatcher-port 61514 -- /Users/johan_lunds/Documents/Kod/apoex2/script/rails server -b 0.0.0.0 -p 3000 -e development
 ```
+
+# TODO: Next add:
+#       1. breakpoint disable/enable with row gutter indicators.
+#       2. Indicate where debugger is paused by: open current file, make that editor the active one, go/focus/scroll to correct line, add style for current line
+#       3. handle client receiving commands from debugger (<breakpoint file="/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb" line="18" threadId="1"/>). See vim-ruby-debugger code
+#       4. add state/statemachine to Atom plugin: starting, running, paused, quitted/not running
+
+# 1. add breakpoint ("break file_path:32")
+# 2. remove breakpoint ("delete N" or perhaps "delete" to delete all and then re-add with "break ...")
+# 3. evaluate expressions ("eval ..."). needs to be escaped??? I think ";" is used to separate commands so that needs to be escaped
+# 4. list backtrace ("backtrace") 
+# 5. move up, down and to specified frame ("up", "down", "frame N")
+# 6. show variable values ("var inspect <XYZ>"). what can be sent as <XYZ>??
+# 7. step over, into, out ("step" = into, "next" = over, "finish" = out). "over" and "into" can have arg "+" = force, which is probably useful.
+# 8. continue until next breakpoint ("cont")
+# 9. "var local", "var instance <OBJECT>" where object is object id "+0x123abc" or expression ("Rails.env"?), "var global", "var const <CLASS_OR_MODULE>"
+
+# Other: what is "jump" used for??
+# Other: what is difference between "pause" and "interrupt"??
+# Other: "thread ..." commands (use together with "backtrace")
+

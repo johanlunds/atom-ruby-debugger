@@ -7,6 +7,10 @@ class RubyDebuggerView
     @client = null
     @child = null
     
+    breakpoints = [
+      "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb:18"
+    ]
+    
     # Create root element
     @element = document.createElement('div')
     @element.classList.add('ruby-debugger')
@@ -18,13 +22,23 @@ class RubyDebuggerView
     # message.classList.add('message')
     @element.appendChild(message)
     
-    ["info break", "start", "exit"].forEach (cmd) =>
+    ["info break", "start", "exit", "interrupt"].forEach (cmd) =>
       # Create message element
       message = document.createElement('button')
       message.textContent = "Run cmd: " + cmd
       message.addEventListener 'click', => @client.write(cmd + "\n")
       # message.classList.add('message')
       @element.appendChild(message)
+
+    cmd = "break"
+    # Create message element
+    message = document.createElement('button')
+    message.textContent = "Run cmd: " + cmd
+    message.addEventListener 'click', =>
+      for breakpoint in breakpoints
+        @client.write(cmd + " " + breakpoint + "\n")
+    # message.classList.add('message')
+    @element.appendChild(message)
 
   startDebugger: ->
     # TODO: fix hardcoded paths here to make it work for any Atom Ruby-project (use Atom scoped settings?)
