@@ -113,7 +113,7 @@ class RubyDebuggerView
       switch root
         when 'breakpoint'
           file = result.breakpoint.attrs.file
-          line = parseInt(result.breakpoint.attrs.line)
+          line = parseInt(result.breakpoint.attrs.line) - 1 # zero-indexed
           atom.workspace.open(file, initialLine: line)
             .then (editor) -> console.log(editor)
         # case 'suspended'           then
