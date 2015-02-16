@@ -1,5 +1,6 @@
-exec = require('child_process').exec
-net = require('net')
+{exec} = require 'child_process'
+net = require 'net'
+{parseString} = require 'xml2js'
 
 module.exports =
 class RubyDebuggerView
@@ -26,7 +27,7 @@ class RubyDebuggerView
       # Create message element
       message = document.createElement('button')
       message.textContent = "Run cmd: " + cmd
-      message.addEventListener 'click', => @client.write(cmd + "\n")
+      message.addEventListener 'click', => @runCmd(cmd)
       # message.classList.add('message')
       @element.appendChild(message)
 
@@ -36,7 +37,7 @@ class RubyDebuggerView
     message.textContent = "Run cmd: " + cmd
     message.addEventListener 'click', =>
       for breakpoint in breakpoints
-        @client.write(cmd + " " + breakpoint + "\n")
+        @runCmd(cmd, breakpoint)
     # message.classList.add('message')
     @element.appendChild(message)
 
@@ -79,8 +80,9 @@ class RubyDebuggerView
         console.log 'Connected'
         # client.write 'info break'
         return
-      @client.on 'data', (data) ->
+      @client.on 'data', (data) =>
         console.log 'Received: ' + data
+        @handleCmd(data)
         # client.destroy()
         # kill client after server's response
         return
@@ -89,6 +91,37 @@ class RubyDebuggerView
         @client = null
         return
     , 5000
+
+  runCmd: (cmd, arg) ->
+    if arg
+      @client.write(cmd + " " + arg + "\n")
+    else
+      @client.write(cmd + "\n")
+
+  handleCmd: (xml) ->
+    parseString xml, attrkey: 'attrs', (err, result) ->
+      # TODO: handle XML-error and unknown XML root-tag
+      util = require('util')
+      console.log(util.inspect(result, false, null))
+      
+      root = Object.keys(result)[0]
+      
+      switch root
+        when 'breakpoint'
+          file = result.breakpoint.attrs.file
+          line = parseInt(result.breakpoint.attrs.line)
+          atom.workspace.open(file, initialLine: line)
+            .then (editor) -> console.log(editor)
+        # case 'suspended'           then
+        # case 'exception'           then
+        # case 'breakpointAdded'     then
+        # case 'catchpointSet'       then
+        # case 'variables'           then
+        # case 'error'               then
+        # case 'message'             then
+        # case 'eval'                then
+        # case 'processingException' then
+        # case 'frames'              then
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
