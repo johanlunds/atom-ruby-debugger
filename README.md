@@ -4,8 +4,29 @@ A short description of your package.
 
 ![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
 
+## Instructions
 
-# NOTES
+Currently only Ruby 2 is supported. It might work with Ruby 1.9.
+
+1. Install debugger gems with: `gem install ruby-debug-ide debase`
+2. Configure settings:
+  
+```coffee
+"ruby-debugger":
+  rdebugIdeBinPath: "rdebug-ide" # you can run `which rdebug-ide` to find the path
+  scriptToRun: "script/rails server"
+```
+
+You can also set `scriptToRun` per project or per file type. See package [Project Manager](https://github.com/danielbrodin/atom-project-manager). Example `projects.cson`:
+
+```coffee
+'My Project':
+  # ...
+  'settings':
+    "ruby-debugger.scriptToRun": "bin/rails server"
+```
+
+## NOTES
 
 * `gem install debugger-xml` which is a compatible replacement for `ruby-debug-ide`
 * will install `byebug` or `debugger` automatically

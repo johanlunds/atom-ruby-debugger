@@ -2,6 +2,14 @@ RubyDebuggerView = require './ruby-debugger-view'
 {CompositeDisposable, Task} = require 'atom'
 
 module.exports = RubyDebugger =
+  config:
+    rdebugIdeBinPath:
+      type: 'string'
+      default: 'rdebug-ide'
+    scriptToRun:
+      type: 'string'
+      default: 'script/rails server'
+
   rubyDebuggerView: null
   modalPanel: null
   subscriptions: null

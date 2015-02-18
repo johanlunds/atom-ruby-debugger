@@ -41,28 +41,32 @@ class RubyDebuggerView
     # message.classList.add('message')
     @element.appendChild(message)
 
+  # TODO: error handling on cmd or socket errors
   startDebugger: ->
-    # TODO: fix hardcoded paths here to make it work for any Atom Ruby-project (use Atom scoped settings?)
+    editor = atom.workspace.getActiveTextEditor()
+    scopeDescriptor = editor.getRootScopeDescriptor()
+    rdebugIdeBinPath = atom.config.get('ruby-debugger.rdebugIdeBinPath', scope: scopeDescriptor)
+    scriptToRun = atom.config.get('ruby-debugger.scriptToRun', scope: scopeDescriptor)
+    host = "127.0.0.1"
+    port = 61513
+    projectDir = atom.project.getPaths()[0]
+
     cmd = [
-      "/Users/johan_lunds/.rbenv/versions/2.1.5/bin/ruby "
-      "-e 'at_exit{sleep(1)};$stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)' "
-      "/usr/local/var/rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/ruby-debug-ide-0.4.24/bin/rdebug-ide "
+      rdebugIdeBinPath
       "--debug "
       "--disable-int-handler "
       "--evaluation-timeout 10 "
-      "--rubymine-protocol-extensions "
-      "--port 61513 "
+      # "--rubymine-protocol-extensions "
+      "--host #{host}"
+      "--port #{port}"
       # "--dispatcher-port 61514 "
       "--"
-      "/Users/johan_lunds/Documents/Kod/apoex2/script/rails server"
-      "-b 0.0.0.0"
-      "-p 3000"
-      "-e development"
+      scriptToRun
     ].join(" ")
+    
+    console.log("running cmd: ", cmd, " in dir: ", projectDir)
 
-
-
-    @child = exec(cmd) # , env: { 'RUBYLIB': '' }
+    @child = exec(cmd, cwd: projectDir)
     @child.stdout.on 'data', (data) ->
       console.log 'stdout: ' + data
       return
@@ -76,7 +80,7 @@ class RubyDebuggerView
     
     setTimeout => 
       @client = new net.Socket()
-      @client.connect 61513, '127.0.0.1', ->
+      @client.connect port, host, ->
         console.log 'Connected'
         # client.write 'info break'
         return
