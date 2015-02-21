@@ -1,7 +1,5 @@
 {EventEmitter} = require 'events'
-sax = require('sax')
-
-util = require 'util'
+sax = require 'sax'
 
 module.exports = 
 class Parser
@@ -13,8 +11,6 @@ class Parser
     stack = []
     @parser = sax.parser(strict, options)
     
-    # opencdata, cdata, closecdata
-
     @parser.onerror = (e) ->
       # an error happened.
       return
@@ -28,11 +24,12 @@ class Parser
       return
 
     @parser.onopentag = (node) ->
-      stack.push(node)
       # opened a tag.  node has "name" and "attributes"
+      stack.push(node)
       return
 
     @parser.onclosetag = (name) =>
+      # closed a tag. "name" is tag name
       node = stack.pop()
       result = {}
       res2 = {}
@@ -45,14 +42,15 @@ class Parser
         parent = stack[stack.length - 1]
         parent.children ?= []
         parent.children.push(result)
-      # closed a tag. "name" is tag name
       return
-
-
 
   write: (text) ->
     @parser.write(text)
-    
+  
+  # Supported events:
+  #
+  # * "command"
+  #
   on: (event, cb) ->
     @events.on event, cb
     
