@@ -27,21 +27,24 @@ describe "XML parsing", ->
         expect(results[0]).toEqual
           breakpoints:
             children: [
-              breakpoint:
+              breakpoint: 
                 attrs:
                   n: "1"
                   file: "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb"
                   line: "18"
+            ,
               breakpoint:
                 attrs:
                   n: "2"
                   file: "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb"
                   line: "35"
+            ,
               breakpoint:
                 attrs:
                   n: "3"
                   file: "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb"
                   line: "18"
+            ,
               breakpoint:
                 attrs:
                   n: "4"
@@ -95,16 +98,19 @@ describe "XML parsing", ->
                   n: "1"
                   file: "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb"
                   line: "18"
+            ,
               breakpoint:
                 attrs:
                   n: "2"
                   file: "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb"
                   line: "35"
+            ,
               breakpoint:
                 attrs:
                   n: "3"
                   file: "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb"
                   line: "18"
+            ,
               breakpoint:
                 attrs:
                   n: "4"
