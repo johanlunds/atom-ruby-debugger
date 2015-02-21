@@ -1,4 +1,5 @@
 RubyDebuggerView = require './ruby-debugger-view'
+RubyDebuggerClient = require './ruby-debugger-client'
 {CompositeDisposable, Task} = require 'atom'
 
 module.exports = RubyDebugger =
@@ -15,7 +16,8 @@ module.exports = RubyDebugger =
   subscriptions: null
 
   activate: (state) ->
-    @rubyDebuggerView = new RubyDebuggerView(state.rubyDebuggerViewState)
+    @client = new RubyDebuggerClient()
+    @rubyDebuggerView = new RubyDebuggerView(state.rubyDebuggerViewState, @client)
     @modalPanel = atom.workspace.addBottomPanel(item: @rubyDebuggerView.getElement(), visible: false)
 
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
@@ -28,6 +30,7 @@ module.exports = RubyDebugger =
     @modalPanel.destroy()
     @subscriptions.dispose()
     @rubyDebuggerView.destroy()
+    @client.destroy()
 
   serialize: ->
     rubyDebuggerViewState: @rubyDebuggerView.serialize()
