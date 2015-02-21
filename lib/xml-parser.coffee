@@ -1,8 +1,10 @@
 {EventEmitter} = require 'events'
 sax = require 'sax'
 
+# Implement custom streaming XML-parser that
+# supports multiple root elements.
 module.exports = 
-class Parser
+class XmlParser
 
   constructor: () ->
     @events = new EventEmitter()
@@ -32,10 +34,10 @@ class Parser
       # closed a tag. "name" is tag name
       node = stack.pop()
       result = {}
-      res2 = {}
-      res2.attrs = node.attributes if Object.keys(node.attributes).length
-      res2.children = node.children if node.children?.length
-      result[node.name] = res2
+      object = {}
+      object.attrs = node.attributes if Object.keys(node.attributes).length
+      object.children = node.children if node.children?.length
+      result[node.name] = object
       if stack.length == 0
         @events.emit 'command', result
       else

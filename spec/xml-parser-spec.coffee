@@ -1,30 +1,28 @@
-Parser = require '../lib/xml-parser'
+XmlParser = require '../lib/xml-parser'
 
+describe "XmlParser", ->
 
-describe "XML parsing", ->
-  
+  beforeEach ->
+    @res = []
+    @parser = new XmlParser()
+    @parser.on 'command', (res) =>
+      @res.push(res)
+
   beforeEach ->
     @t1 = '<breakpoints><breakpoint n="1" file="/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb" line="18" /><breakpoint n="2" file="/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb" line="35" /><breakpoint n="3" file="/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb" line="18" /><breakpoint n="4" file="/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb" line="35" /></breakpoints>'
     @t2 = '<breakpointAdded no="3" location="/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb:18"/><breakpointAdded no="4" location="/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb:35"/>'
     @t3 = '<breakpoint file="/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb" line="18" threadId="1"/>'
     @t4 = @t1 + @t3
 
-  
-
-  describe "", ->
-    it "works for @t1", ->
-      parser = new Parser()
-      results = []
-      parser.on 'command', (res) ->
-        results.push(res)
-      
-      parser.write(@t1)
+  describe "parsing", ->
+    it "works for base case", ->
+      @parser.write(@t1)
       
       waitsFor ->
-        results.length == 1
+        @res.length == 1
       
       runs ->
-        expect(results[0]).toEqual
+        expect(@res[0]).toEqual
           breakpoints:
             children: [
               breakpoint: 
@@ -52,45 +50,35 @@ describe "XML parsing", ->
                   line: "35"
             ]
       
-      
-    it "works for @t2", ->
-      parser = new Parser()
-      results = []
-      parser.on 'command', (res) ->
-        results.push(res)
-      
-      parser.write(@t2)
+    it "works for multiple root elements", ->
+      @parser.write(@t2)
       
       waitsFor ->
-        results.length == 2
+        @res.length == 2
       
       runs ->
         
-        expect(results[0]).toEqual
+        expect(@res[0]).toEqual
           breakpointAdded:
             attrs:
               no: "3"
               location: "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb:18"
-        expect(results[1]).toEqual
+              
+        expect(@res[1]).toEqual
           breakpointAdded:
             attrs:
               no: "4"
               location: "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb:35"
 
-
-    it "works for @t4", ->
-      parser = new Parser()
-      results = []
-      parser.on 'command', (res) ->
-        results.push(res)
-      
-      parser.write(@t4)
+    it "can have the same element name in both children and root element", ->
+      # breakpoint exists both as root element and as child in breakpoints
+      @parser.write(@t4)
       
       waitsFor ->
-        results.length == 2
+        @res.length == 2
       
       runs ->
-        expect(results[0]).toEqual
+        expect(@res[0]).toEqual
           breakpoints:
             children: [
               breakpoint:
@@ -117,7 +105,8 @@ describe "XML parsing", ->
                   file: "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb"
                   line: "35"
             ]
-        expect(results[1]).toEqual
+            
+        expect(@res[1]).toEqual
           breakpoint:
             attrs:
               file: "/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb"
