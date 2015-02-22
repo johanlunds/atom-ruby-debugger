@@ -40,7 +40,7 @@ class RubyDebuggerClient
       console.log 'stdout: ' + data
       return
     @server.stderr.on 'data', (data) ->
-      console.log 'stdout: ' + data
+      console.log 'stderr: ' + data
       return
     @server.on 'close', (code) =>
       console.log 'closing code: ' + code
@@ -51,13 +51,10 @@ class RubyDebuggerClient
       @client = new net.Socket()
       @client.connect port, host, ->
         console.log 'Connected'
-        # client.write 'info break'
         return
       @client.on 'data', (data) =>
         console.log 'Received: ' + data
         @cmdParser.write(data.toString())
-        # client.destroy()
-        # kill client after server's response
         return
       @client.on 'close', =>
         console.log 'Connection closed'
@@ -110,5 +107,4 @@ class RubyDebuggerClient
     # TODO: stop the debugger when closing project/editor & other events (which?). this method seems to only be run on Atom exit?
     @client?.end()
     @server?.kill() # SIGTERM
-    # @server?.kill('SIGHUP')
 

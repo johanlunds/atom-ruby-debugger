@@ -1,6 +1,6 @@
 RubyDebuggerView = require './ruby-debugger-view'
 RubyDebuggerClient = require './ruby-debugger-client'
-{CompositeDisposable, Task} = require 'atom'
+{CompositeDisposable} = require 'atom'
 
 module.exports = RubyDebugger =
   config:
@@ -36,8 +36,6 @@ module.exports = RubyDebugger =
     rubyDebuggerViewState: @rubyDebuggerView.serialize()
 
   toggle: ->
-    console.log 'RubyDebugger was toggled!'
-
     if @modalPanel.isVisible()
       @modalPanel.hide()
     else
