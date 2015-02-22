@@ -7,6 +7,8 @@ class RubyDebuggerClient
   constructor: () ->
     @client = null
     @child = null
+    @cmdParser = new XmlParser()
+    @cmdParser.on 'command', (command) => @handleCmd(command)
     
   # TODO: error handling on cmd or socket errors
   startDebugger: ->
@@ -45,10 +47,7 @@ class RubyDebuggerClient
       @child = null
       return
     
-    setTimeout => 
-      cmdParser = new XmlParser()
-      cmdParser.on 'command', (command) => @handleCmd(command)
-        
+    setTimeout =>
       @client = new net.Socket()
       @client.connect port, host, ->
         console.log 'Connected'
@@ -56,7 +55,7 @@ class RubyDebuggerClient
         return
       @client.on 'data', (data) =>
         console.log 'Received: ' + data
-        cmdParser.write(data.toString())
+        @cmdParser.write(data.toString())
         # client.destroy()
         # kill client after server's response
         return
@@ -95,6 +94,16 @@ class RubyDebuggerClient
       # case 'eval'                then
       # case 'processingException' then
       # case 'frames'              then
+      
+      # case 'breakpointDeleted'   then
+      # case 'breakpointEnabled'   then
+      # case 'breakpointDisabled'  then
+      # case 'conditionSet'        then
+      # case 'expressions'         then
+      # case 'expressionInfo'      then
+      # case 'threads'             then
+      # case 'breakpoints'         then
+      # case 'loadResult'          then
 
   # Tear down any state and detach
   destroy: ->
