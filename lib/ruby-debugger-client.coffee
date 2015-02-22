@@ -6,7 +6,7 @@ module.exports =
 class RubyDebuggerClient
   constructor: () ->
     @client = null
-    @child = null
+    @server = null
     @cmdParser = new XmlParser()
     @cmdParser.on 'command', (command) => @handleCmd(command)
     
@@ -22,29 +22,29 @@ class RubyDebuggerClient
 
     cmd = [
       rdebugIdeBinPath
-      "--debug "
-      "--disable-int-handler "
-      "--evaluation-timeout 10 "
-      # "--rubymine-protocol-extensions "
+      "--debug"
+      "--disable-int-handler"
+      "--evaluation-timeout 10"
+      # "--rubymine-protocol-extensions"
       "--host #{host}"
       "--port #{port}"
-      # "--dispatcher-port 61514 "
+      # "--dispatcher-port 61514"
       "--"
       scriptToRun
     ].join(" ")
     
     console.log("running cmd: ", cmd, " in dir: ", projectDir)
 
-    @child = exec(cmd, cwd: projectDir)
-    @child.stdout.on 'data', (data) ->
+    @server = exec(cmd, cwd: projectDir)
+    @server.stdout.on 'data', (data) ->
       console.log 'stdout: ' + data
       return
-    @child.stderr.on 'data', (data) ->
+    @server.stderr.on 'data', (data) ->
       console.log 'stdout: ' + data
       return
-    @child.on 'close', (code) =>
+    @server.on 'close', (code) =>
       console.log 'closing code: ' + code
-      @child = null
+      @server = null
       return
     
     setTimeout =>
@@ -109,6 +109,6 @@ class RubyDebuggerClient
   destroy: ->
     # TODO: stop the debugger when closing project/editor & other events (which?). this method seems to only be run on Atom exit?
     @client?.end()
-    @child?.kill() # SIGTERM
-    # @child?.kill('SIGHUP')
+    @server?.kill() # SIGTERM
+    # @server?.kill('SIGHUP')
 
