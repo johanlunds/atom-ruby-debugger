@@ -1,6 +1,6 @@
 {exec} = require 'child_process'
 net = require 'net'
-{parseString} = require 'xml2js'
+XmlParser = require './xml-parser'
 
 module.exports =
 class RubyDebuggerClient
@@ -46,6 +46,9 @@ class RubyDebuggerClient
       return
     
     setTimeout => 
+      cmdParser = new XmlParser()
+      cmdParser.on 'command', (command) => @handleCmd(command)
+        
       @client = new net.Socket()
       @client.connect port, host, ->
         console.log 'Connected'
@@ -53,7 +56,7 @@ class RubyDebuggerClient
         return
       @client.on 'data', (data) =>
         console.log 'Received: ' + data
-        @handleCmd(data)
+        cmdParser.write(data.toString())
         # client.destroy()
         # kill client after server's response
         return
@@ -69,30 +72,29 @@ class RubyDebuggerClient
     else
       @client.write(cmd + "\n")
 
-  handleCmd: (xml) ->
-    parseString xml, attrkey: 'attrs', (err, result) ->
-      # TODO: handle XML-error and unknown XML root-tag
-      util = require('util')
-      console.log(util.inspect(result, false, null))
-      
-      root = Object.keys(result)[0]
-      
-      switch root
-        when 'breakpoint'
-          file = result.breakpoint.attrs.file
-          line = parseInt(result.breakpoint.attrs.line) - 1 # zero-indexed
-          atom.workspace.open(file, initialLine: line)
-            .then (editor) -> console.log(editor)
-        # case 'suspended'           then
-        # case 'exception'           then
-        # case 'breakpointAdded'     then
-        # case 'catchpointSet'       then
-        # case 'variables'           then
-        # case 'error'               then
-        # case 'message'             then
-        # case 'eval'                then
-        # case 'processingException' then
-        # case 'frames'              then
+  handleCmd: (command) ->
+    # TODO: handle XML-error and unknown XML root-tag
+    util = require('util')
+    console.log(util.inspect(command, false, null))
+    
+    name = Object.keys(command)[0]
+    
+    switch name
+      when 'breakpoint'
+        file = command.breakpoint.attrs.file
+        line = parseInt(command.breakpoint.attrs.line) - 1 # zero-indexed
+        atom.workspace.open(file, initialLine: line)
+          .then (editor) -> console.log(editor)
+      # case 'suspended'           then
+      # case 'exception'           then
+      # case 'breakpointAdded'     then
+      # case 'catchpointSet'       then
+      # case 'variables'           then
+      # case 'error'               then
+      # case 'message'             then
+      # case 'eval'                then
+      # case 'processingException' then
+      # case 'frames'              then
 
   # Tear down any state and detach
   destroy: ->
