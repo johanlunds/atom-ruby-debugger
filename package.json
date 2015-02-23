@@ -1,6 +1,6 @@
 {
   "name": "ruby-debugger",
-  "main": "./lib/ruby-debugger",
+  "main": "./lib/main",
   "version": "0.0.0",
   "description": "Provides a small Ruby-debugger in Atom",
   "activationCommands": {
