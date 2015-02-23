@@ -1,5 +1,5 @@
 module.exports =
-class RubyDebuggerView
+class View
   constructor: (serializeState, client) ->
     @client = client
     

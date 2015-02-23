@@ -1,11 +1,10 @@
-RubyDebugger = require '../lib/ruby-debugger'
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 #
 # To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
 # or `fdescribe`). Remove the `f` to unfocus the block.
 
-describe "RubyDebugger", ->
+describe "ruby-debugger", ->
   [workspaceElement, activationPromise] = []
 
   beforeEach ->
@@ -28,13 +27,13 @@ describe "RubyDebugger", ->
       runs ->
         expect(workspaceElement.querySelector('.ruby-debugger')).toExist()
 
-        rubyDebuggerElement = workspaceElement.querySelector('.ruby-debugger')
-        expect(rubyDebuggerElement).toExist()
+        element = workspaceElement.querySelector('.ruby-debugger')
+        expect(element).toExist()
 
-        rubyDebuggerPanel = atom.workspace.panelForItem(rubyDebuggerElement)
-        expect(rubyDebuggerPanel.isVisible()).toBe true
+        panel = atom.workspace.panelForItem(element)
+        expect(panel.isVisible()).toBe true
         atom.commands.dispatch workspaceElement, 'ruby-debugger:toggle'
-        expect(rubyDebuggerPanel.isVisible()).toBe false
+        expect(panel.isVisible()).toBe false
 
     it "hides and shows the view", ->
       # This test shows you an integration test testing at the view level.
@@ -56,7 +55,7 @@ describe "RubyDebugger", ->
 
       runs ->
         # Now we can test for view visibility
-        rubyDebuggerElement = workspaceElement.querySelector('.ruby-debugger')
-        expect(rubyDebuggerElement).toBeVisible()
+        element = workspaceElement.querySelector('.ruby-debugger')
+        expect(element).toBeVisible()
         atom.commands.dispatch workspaceElement, 'ruby-debugger:toggle'
-        expect(rubyDebuggerElement).not.toBeVisible()
+        expect(element).not.toBeVisible()

@@ -3,7 +3,7 @@ net = require 'net'
 XmlParser = require './xml-parser'
 
 module.exports =
-class RubyDebuggerClient
+class Client
   constructor: () ->
     @client = null
     @server = null
