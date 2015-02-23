@@ -2,7 +2,7 @@
   "name": "ruby-debugger",
   "main": "./lib/ruby-debugger",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "Provides a small Ruby-debugger in Atom",
   "activationCommands": {
     "atom-workspace": "ruby-debugger:toggle"
   },
