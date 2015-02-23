@@ -9,7 +9,7 @@ notifications:
     on_failure: always # change
 
 install:
-  - gem update bundler
+  - gem update bundler --no-rdoc --no-ri
   - bundle install
 
 script: 
