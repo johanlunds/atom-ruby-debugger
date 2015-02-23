@@ -7,5 +7,10 @@ notifications:
   email:
     on_success: change # never
     on_failure: always # change
- 
-script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+
+install:
+  - gem update bundler
+  - bundle install
+
+script: 
+  - curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh
