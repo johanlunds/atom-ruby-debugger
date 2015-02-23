@@ -1,6 +1,4 @@
-View = require './view'
-Client = require './client'
-{CompositeDisposable} = require 'atom'
+RubyDebugger = require './ruby-debugger'
 
 module.exports =
   config:
@@ -12,27 +10,12 @@ module.exports =
       default: 'script/rails server'
 
   activate: (state) ->
-    @client = new Client()
-    @view = new View(state.viewState, @client)
-    @panel = atom.workspace.addBottomPanel(item: @view.getElement(), visible: false)
-
-    # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
-    @subscriptions = new CompositeDisposable
-
-    # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'ruby-debugger:toggle': => @toggle()
+    @rubyDebugger = new RubyDebugger(state)
 
   deactivate: ->
-    @panel.destroy()
-    @subscriptions.dispose()
-    @view.destroy()
-    @client.destroy()
+    @rubyDebugger.destroy()
+    @rubyDebugger = null
 
   serialize: ->
-    viewState: @view.serialize()
+    @rubyDebugger.serialize()
 
-  toggle: ->
-    if @panel.isVisible()
-      @panel.hide()
-    else
-      @panel.show()
