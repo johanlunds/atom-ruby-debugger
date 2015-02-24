@@ -8,6 +8,7 @@
 * XML api docs: see generated PDF in this repo. Source: https://github.com/ruby-debug/ruby-debug-ide/blob/master/doc/protocol-spec.texi
 * Trello board: https://trello.com/b/M3yhQM2b
 * see pics of Chrome debugger and RubyMine for reference
+* Moqups: https://moqups.com/#!/edit/johan_lunds/wHo53Ddh (also see exported `.pdf` in docs/)
 
 ```
 function! RubyDebugger.receive_command() dict
