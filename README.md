@@ -8,7 +8,7 @@ Provides a small Ruby-debugger in Atom.
 
 ## Instructions
 
-There's not a published Atom-package yet. Stay tuned!
+There's no published Atom-package yet. Stay tuned!
 
 Currently only Ruby 2 is supported. It might work with Ruby 1.9.
 
