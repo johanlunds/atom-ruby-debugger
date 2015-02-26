@@ -10,24 +10,26 @@ Provides a small Ruby-debugger in Atom.
 
 There's no published Atom-package yet. Stay tuned!
 
-Currently only Ruby 2 is supported. It might work with Ruby 1.9.
-
 1. Install debugger gems with: `gem install ruby-debug-ide debase`
-2. Configure settings:
-  
+2. Start the debugger with `rdebug-ide -- [SCRIPT] [ARGUMENTS...]`.
+   Example: `rdebug-ide -- bin/rails server`.
+   It's important that you use **the full path to a Ruby-script**. Otherwise you'll get an error.
+3. Connect to the debugger from Atom.
+
+Currently only Ruby 2 is supported. It might work with 1.9 but it hasn't been tested.
+
+### Debugging with `rspec`, `rake` or `bundle`
+
+If you want to start the debugger with `rspec`, `rake`, `bundle` or some other Ruby-binary that you don't know the path to:
+
+* ``rdebug-ide -- `which rspec` spec/lib/foo_spec.rb``
+* If you use Rbenv it generates shell wrapper scripts that makes the previous not work. Use `rbenv which` instead of `which`.
+
+## Configuration
+
+If you run `rdebug-ide` with `--port PORT` you can tell Atom which port to connect to:
+
 ```coffee
 "ruby-debugger":
-  rdebugIdeBinPath: "rdebug-ide" # you can run `which rdebug-ide` to find the path
-  scriptToRun: "script/rails server"
+  port: 1234
 ```
-
-You can also set `scriptToRun` per project or per file type. See package [Project Manager](https://github.com/danielbrodin/atom-project-manager). Example `projects.cson`:
-
-```coffee
-'My Project':
-  # ...
-  'settings':
-    "ruby-debugger.scriptToRun": "bin/rails server"
-```
-
-

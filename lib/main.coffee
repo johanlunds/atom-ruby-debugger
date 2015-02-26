@@ -2,12 +2,9 @@ RubyDebugger = require './ruby-debugger'
 
 module.exports =
   config:
-    rdebugIdeBinPath:
-      type: 'string'
-      default: 'rdebug-ide'
-    scriptToRun:
-      type: 'string'
-      default: 'script/rails server'
+    port:
+      type: 'integer'
+      default: 1234
 
   activate: (state) ->
     @rubyDebugger = new RubyDebugger(state)

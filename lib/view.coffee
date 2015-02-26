@@ -14,8 +14,8 @@ class View
 
     # Create message element
     message = document.createElement('button')
-    message.textContent = "Start debugger"
-    message.addEventListener 'click', => @client.startDebugger()
+    message.textContent = "Connect"
+    message.addEventListener 'click', => @client.connect()
     # message.classList.add('message')
     @element.appendChild(message)
     

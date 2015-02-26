@@ -1,66 +1,30 @@
-{exec} = require 'child_process'
 net = require 'net'
 XmlParser = require './xml-parser'
 
 module.exports =
 class Client
-  constructor: () ->
+  constructor: ->
+    @host = '127.0.0.1'
+    @port = atom.config.get('ruby-debugger.port')
     @client = null
     @server = null
     @cmdParser = new XmlParser()
     @cmdParser.on 'command', (command) => @handleCmd(command)
     
   # TODO: error handling on cmd or socket errors
-  startDebugger: ->
-    editor = atom.workspace.getActiveTextEditor()
-    scopeDescriptor = editor.getRootScopeDescriptor()
-    rdebugIdeBinPath = atom.config.get('ruby-debugger.rdebugIdeBinPath', scope: scopeDescriptor)
-    scriptToRun = atom.config.get('ruby-debugger.scriptToRun', scope: scopeDescriptor)
-    host = "127.0.0.1"
-    port = 61513
-    projectDir = atom.project.getPaths()[0]
-
-    cmd = [
-      rdebugIdeBinPath
-      "--debug"
-      "--disable-int-handler"
-      "--evaluation-timeout 10"
-      # "--rubymine-protocol-extensions"
-      "--host #{host}"
-      "--port #{port}"
-      # "--dispatcher-port 61514"
-      "--"
-      scriptToRun
-    ].join(" ")
-    
-    console.log("running cmd: ", cmd, " in dir: ", projectDir)
-
-    @server = exec(cmd, cwd: projectDir)
-    @server.stdout.on 'data', (data) ->
-      console.log 'stdout: ' + data
+  connect: ->
+    @client = new net.Socket()
+    @client.connect @port, @host, ->
+      console.log 'Connected'
       return
-    @server.stderr.on 'data', (data) ->
-      console.log 'stderr: ' + data
+    @client.on 'data', (data) =>
+      console.log 'Received: ' + data
+      @cmdParser.write(data.toString())
       return
-    @server.on 'close', (code) =>
-      console.log 'closing code: ' + code
-      @server = null
+    @client.on 'close', =>
+      console.log 'Connection closed'
+      @client = null
       return
-    
-    setTimeout =>
-      @client = new net.Socket()
-      @client.connect port, host, ->
-        console.log 'Connected'
-        return
-      @client.on 'data', (data) =>
-        console.log 'Received: ' + data
-        @cmdParser.write(data.toString())
-        return
-      @client.on 'close', =>
-        console.log 'Connection closed'
-        @client = null
-        return
-    , 5000
 
   runCmd: (cmd, arg) ->
     if arg
