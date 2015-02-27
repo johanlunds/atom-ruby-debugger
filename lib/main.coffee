@@ -10,9 +10,9 @@ module.exports =
     @rubyDebugger = new RubyDebugger(state)
 
   deactivate: ->
-    @rubyDebugger.destroy()
+    @rubyDebugger?.destroy()
     @rubyDebugger = null
 
   serialize: ->
-    @rubyDebugger.serialize()
+    @rubyDebugger?.serialize()
 
