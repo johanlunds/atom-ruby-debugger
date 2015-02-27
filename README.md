@@ -8,9 +8,9 @@ Provides a small Ruby-debugger in Atom. **THIS IS CURRENTLY WORK-IN-PROGRESS - I
 
 ## Instructions
 
-1. Install the package: `apm install ruby-debugger`
-2. Install debugger gems with: `gem install ruby-debug-ide debase`
-3. Start the debugger with `rdebug-ide -- [SCRIPT] [ARGUMENTS...]`.
+1. `apm install ruby-debugger`
+2. `gem install ruby-debug-ide debase`
+3. Start the debugger with `rdebug-ide -- [SCRIPT] [ARGUMENTS...]`.  
    Example: `rdebug-ide -- bin/rails server`.
    It's important that you use **the full path to a Ruby-script**. Otherwise you'll get an error.
 4. Connect to the debugger from Atom.
