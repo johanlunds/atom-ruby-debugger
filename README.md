@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/johanlunds/atom-ruby-debugger.svg?branch=master)](https://travis-ci.org/johanlunds/atom-ruby-debugger)
 
-Provides a small Ruby-debugger in Atom.
+Provides a small Ruby-debugger in Atom. **THIS IS CURRENTLY WORK-IN-PROGRESS - IT'S NOT USEFUL YET**.
 
 *TODO: insert screenshot here*
 
