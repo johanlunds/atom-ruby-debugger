@@ -6,31 +6,30 @@ class Client
   constructor: ->
     @host = '127.0.0.1'
     @port = atom.config.get('ruby-debugger.port')
-    @client = null
-    @server = null
+    @socket = null
     @cmdParser = new XmlParser()
     @cmdParser.on 'command', (command) => @handleCmd(command)
     
   # TODO: error handling on cmd or socket errors
   connect: ->
-    @client = new net.Socket()
-    @client.connect @port, @host, ->
+    @socket = new net.Socket()
+    @socket.connect @port, @host, ->
       console.log 'Connected'
       return
-    @client.on 'data', (data) =>
+    @socket.on 'data', (data) =>
       console.log 'Received: ' + data
       @cmdParser.write(data.toString())
       return
-    @client.on 'close', =>
+    @socket.on 'close', =>
       console.log 'Connection closed'
-      @client = null
+      @socket = null
       return
 
   runCmd: (cmd, arg) ->
     if arg
-      @client.write(cmd + " " + arg + "\n")
+      @socket.write(cmd + " " + arg + "\n")
     else
-      @client.write(cmd + "\n")
+      @socket.write(cmd + "\n")
 
   handleCmd: (command) ->
     # TODO: handle XML-error and unknown XML root-tag
@@ -69,6 +68,5 @@ class Client
   # Tear down any state and detach
   destroy: ->
     # TODO: stop the debugger when closing project/editor & other events (which?). this method seems to only be run on Atom exit?
-    @client?.end()
-    @server?.kill() # SIGTERM
+    @socket?.end()
 
