@@ -7,7 +7,7 @@ class RubyDebugger
   constructor: (state) ->
     @client = new Client()
     @view = new View(state.viewState, @client)
-    @panel = atom.workspace.addBottomPanel(item: @view.getElement(), visible: false)
+    @panel = atom.workspace.addRightPanel(item: @view.getElement(), visible: false)
 
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable
