@@ -9,6 +9,11 @@
 * Trello board: https://trello.com/b/M3yhQM2b
 * see pics of Chrome debugger and RubyMine for reference
 * Moqups: https://moqups.com/#!/edit/johan_lunds/wHo53Ddh (also see exported `.pdf` in docs/)
+* https://github.com/mikeric/rivets
+  * also read: https://github.com/atom/atom/issues/5756
+    * http://vuejs.org/
+    * https://github.com/lee-dohm/vue-experiment
+    * (https://github.com/atom/elmer)
 
 ```
 function! RubyDebugger.receive_command() dict
