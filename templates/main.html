@@ -3,8 +3,8 @@
 
     <div class='btn-toolbar'>
       <div class='btn-group'>
-        <button class='btn'>Connect</button>
-        <button class='btn'>Play/pause</button>
+        <button class='btn connect' rv-on-click="toggleConnected" rv-text="toggleConnectedText < context.state.current"></button>
+        <button class='btn play' rv-disabled="context.isDisconnected < state.current">Play/pause</button>
         <button class='btn'>...</button>
       </div>
 

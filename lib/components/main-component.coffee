@@ -3,6 +3,12 @@ rivets = require 'rivets'
 module.exports =
 class MainComponent
   constructor: ({@context}) ->
+  
+  toggleConnected: =>
+    if @context.isDisconnected() then @context.connect() else @context.disconnect()
+  
+  toggleConnectedText: =>
+    if @context.isDisconnected() then "Connect" else "Disconnect"
 
 rivets.components['rd-main'] =
   template: ->

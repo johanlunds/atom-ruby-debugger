@@ -3,9 +3,9 @@ XmlParser = require './xml-parser'
 
 module.exports =
 class Client
-  constructor: ->
+  constructor: (@context) ->
     @host = '127.0.0.1'
-    @port = atom.config.get('ruby-debugger.port')
+    @port = atom.config.get('ruby-debugger.port') or 1234
     @socket = null
     @cmdParser = new XmlParser()
     @cmdParser.on 'command', (command) => @handleCmd(command)
@@ -13,17 +13,19 @@ class Client
   # TODO: error handling on cmd or socket errors
   connect: ->
     @socket = new net.Socket()
-    @socket.connect @port, @host, ->
+    @socket.connect @port, @host, =>
       console.log 'Connected'
-      return
+      @context.connected()
     @socket.on 'data', (data) =>
       console.log 'Received: ' + data
       @cmdParser.write(data.toString())
-      return
     @socket.on 'close', =>
       console.log 'Connection closed'
       @socket = null
-      return
+      @context.disconnected()
+
+  disconnect: ->
+    @socket?.end()
 
   runCmd: (cmd, arg) ->
     if arg

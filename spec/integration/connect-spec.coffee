@@ -1,8 +1,3 @@
-# These tests are excluded by default. To run them from the command line:
-#
-# INTEGRATION_TESTS_ENABLED=true apm test
-return unless process.env.INTEGRATION_TESTS_ENABLED
-
 {startDebuggerProcess} = require '../spec-helper'
 
 describe "Connecting to rdebug-ide", ->
@@ -37,10 +32,14 @@ describe "Connecting to rdebug-ide", ->
 
       runs ->
         # 4. Play/start button should not be active
-        expect(workspaceElement.querySelector('.ruby-debugger .play')).toHaveClass("disabled")
+        expect(workspaceElement.querySelector('.ruby-debugger .play')).toBeDisabled()
 
         # 5. click on Connect button
         workspaceElement.querySelector('.ruby-debugger .connect').click()
 
+      waitsFor ->
+        workspaceElement.querySelector('.ruby-debugger .connect').textContent == 'Disconnect'
+
+      runs ->
         # 6. Start button should now be active
-        expect(workspaceElement.querySelector('.ruby-debugger .play')).toHaveClass("enabled")
+        expect(workspaceElement.querySelector('.ruby-debugger .play')).not.toBeDisabled()
