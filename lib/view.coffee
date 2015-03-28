@@ -1,14 +1,14 @@
 rivets = require 'rivets'
 
-require './components/main-component.coffee'
+require './components/main-component'
 
 module.exports =
 class View
-  constructor: (serializeState) ->
+  constructor: (serializeState, context) ->
     # Create root element
     @element = document.createElement('div')
     @element.classList.add('ruby-debugger')
-    @view = rivets.init('rd-main', @element)
+    @view = rivets.init('rd-main', @element, {context})
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->

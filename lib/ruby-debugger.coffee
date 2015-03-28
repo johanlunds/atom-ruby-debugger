@@ -1,12 +1,12 @@
 View = require './view'
-Client = require './client'
+DebuggerContext = require './debugger-context'
 {CompositeDisposable} = require 'atom'
 
 module.exports =
 class RubyDebugger
   constructor: (state) ->
-    @client = new Client()
-    @view = new View(state.viewState, @client)
+    @context = new DebuggerContext()
+    @view = new View(state.viewState, @context)
     @panel = atom.workspace.addRightPanel(item: @view.getElement(), visible: false)
 
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
@@ -19,7 +19,7 @@ class RubyDebugger
     @panel.destroy()
     @subscriptions.dispose()
     @view.destroy()
-    @client.destroy()
+    @context.destroy()
 
   serialize: ->
     viewState: @view.serialize()
