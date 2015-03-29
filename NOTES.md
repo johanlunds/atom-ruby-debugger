@@ -82,3 +82,5 @@ TODO: Next add:
 Other: what is "jump" used for??
 Other: what is difference between "pause" and "interrupt"??
 Other: "thread ..." commands (use together with "backtrace")
+
+Generate Chrome debugger icon font: http://fontastic.me/

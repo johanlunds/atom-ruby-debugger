@@ -15,6 +15,9 @@ class MainComponent
 
   togglePlay: =>
     if @context.isRunning() then @context.pause() else @context.play()
+  
+  playIconClass: =>
+    if @context.isRunning() then "rd-icon-pause" else "rd-icon-play"
 
 rivets.components['rd-main'] =
   template: ->

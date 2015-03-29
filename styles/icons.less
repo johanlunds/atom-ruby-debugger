@@ -1,0 +1,45 @@
+@font-face {
+  font-family: "chrome-debugger";
+  src:url("atom://ruby-debugger/resources/chrome-debugger.eot");
+  src:url("atom://ruby-debugger/resources/chrome-debugger.eot?#iefix") format("embedded-opentype"),
+    url("atom://ruby-debugger/resources/chrome-debugger.woff") format("woff"),
+    url("atom://ruby-debugger/resources/chrome-debugger.ttf") format("truetype"),
+    url("atom://ruby-debugger/resources/chrome-debugger.svg#chrome-debugger") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="rd-icon-"]:before,
+[class*=" rd-icon-"]:before {
+  font-family: "chrome-debugger" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.rd-icon-breakpoints-activate:before {
+  content: "a";
+}
+.rd-icon-breakpoints-deactivate:before {
+  content: "b";
+}
+.rd-icon-pause:before {
+  content: "c";
+}
+.rd-icon-play:before {
+  content: "d";
+}
+.rd-icon-step-in:before {
+  content: "e";
+}
+.rd-icon-step-out:before {
+  content: "f";
+}
+.rd-icon-step-over:before {
+  content: "g";
+}

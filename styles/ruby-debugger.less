@@ -3,7 +3,26 @@
 // See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
 // for a full listing of what's available.
 @import "ui-variables";
+@import "./icons";
 
 .ruby-debugger {
   width: 20vw;
+  
+  .rd-commands {
+    .connect {
+      width: 80px;
+    }
+    
+    [class^="rd-icon-"],
+    [class*=" rd-icon-"] {
+      font-size: 32px;
+      margin: 0 -5px;
+    }
+  }
+  
+  .rd-watch-expressions {}
+  .rd-variables {}
+  .rd-call-stack {}
+  .rd-console {}
+  .rd-breakpoints {}
 }
