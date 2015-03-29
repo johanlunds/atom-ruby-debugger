@@ -10,7 +10,6 @@ class Client
     @cmdParser = new XmlParser()
     @cmdParser.on 'command', (command) => @handleCmd(command)
     
-  # TODO: error handling on cmd or socket errors
   connect: ->
     @socket = new net.Socket()
     @socket.connect @port, @host, =>
