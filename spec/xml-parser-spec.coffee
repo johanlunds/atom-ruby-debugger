@@ -5,7 +5,7 @@ describe "XmlParser", ->
   beforeEach ->
     @res = []
     @parser = new XmlParser()
-    @parser.on 'command', (res) =>
+    @parser.onCommand (res) =>
       @res.push(res)
 
   beforeEach ->

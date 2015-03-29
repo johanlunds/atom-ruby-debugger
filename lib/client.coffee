@@ -8,7 +8,7 @@ class Client
     @port = atom.config.get('ruby-debugger.port') or 1234
     @socket = null
     @cmdParser = new XmlParser()
-    @cmdParser.on 'command', (command) => @handleCmd(command)
+    @cmdParser.onCommand (command) => @handleCmd(command)
     
   connect: ->
     @socket = new net.Socket()

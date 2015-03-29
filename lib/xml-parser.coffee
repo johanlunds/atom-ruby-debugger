@@ -58,11 +58,7 @@ class XmlParser
   write: (text) ->
     @parser.write(text)
   
-  # Supported events:
-  #
-  # * "command"
-  #
-  on: (event, cb) ->
-    @events.on event, cb
+  onCommand: (cb) ->
+    @events.on 'command', cb
     
     
