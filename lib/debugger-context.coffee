@@ -8,8 +8,11 @@ class DebuggerContext
     @state = StateMachine.create
       initial: 'disconnected'
       events: [
-        { name: 'connected', from: 'disconnected', to: 'connected' }
-        { name: 'disconnected', from: 'connected', to: 'disconnected' }
+        { name: 'connect',    from: 'disconnected', to: 'connected' }
+        { name: 'start',      from: 'connected',    to: 'running' }
+        { name: 'pause',      from: 'running',      to: 'paused' }
+        { name: 'continue',   from: 'paused',       to: 'running' }
+        { name: 'disconnect', from: '*',            to: 'disconnected' }
       ]
   
   connect: =>
@@ -19,16 +22,36 @@ class DebuggerContext
     @client.disconnect()
     
   connected: ->
-    @state.connected()
+    @state.connect()
     
   disconnected: ->
-    @state.disconnected() unless @isDisconnected()
+    @state.disconnect()
     
   isConnected: =>
-    @state.is('connected')
+    not @isDisconnected()
     
   isDisconnected: =>
     @state.is('disconnected')
+  
+  isRunning: ->
+    @state.is('running')
+  
+  pause: ->
+    @client.pause()
+
+  paused: (file, line) ->
+    @state.pause()
+    # TODO: request variables, call stack/backtrace etc. open the current file + line
+    atom.workspace.open(file, initialLine: line)
+      .then (editor) -> console.log(editor)
+
+  play: ->
+    if @state.can('start')
+      @client.start()
+      @state.start()
+    else
+      @client.continue()
+      @state.continue()
     
   destroy: ->
     @client.destroy()

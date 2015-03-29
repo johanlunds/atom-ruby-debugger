@@ -4,11 +4,17 @@ module.exports =
 class MainComponent
   constructor: ({@context}) ->
   
-  toggleConnected: =>
+  toggleConnect: =>
     if @context.isDisconnected() then @context.connect() else @context.disconnect()
   
-  toggleConnectedText: =>
+  connectText: =>
     if @context.isDisconnected() then "Connect" else "Disconnect"
+
+  playText: =>
+    if @context.isRunning() then "Pause" else "Play"
+
+  togglePlay: =>
+    if @context.isRunning() then @context.pause() else @context.play()
 
 rivets.components['rd-main'] =
   template: ->

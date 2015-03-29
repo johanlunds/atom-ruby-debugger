@@ -13,18 +13,25 @@ class Client
   connect: ->
     @socket = new net.Socket()
     @socket.connect @port, @host, =>
-      console.log 'Connected'
       @context.connected()
     @socket.on 'data', (data) =>
       console.log 'Received: ' + data
       @cmdParser.write(data.toString())
     @socket.on 'close', =>
-      console.log 'Connection closed'
       @socket = null
       @context.disconnected()
 
   disconnect: ->
     @socket?.end()
+
+  start: ->
+    @runCmd 'start'
+
+  continue: ->
+    @runCmd 'cont'
+
+  pause: ->
+    @runCmd 'pause'
 
   runCmd: (cmd, arg) ->
     if arg
@@ -33,18 +40,17 @@ class Client
       @socket.write(cmd + "\n")
 
   handleCmd: (command) ->
-    # TODO: handle XML-error and unknown XML root-tag
     util = require('util')
     console.log(util.inspect(command, false, null))
     
     name = Object.keys(command)[0]
     
     switch name
-      when 'breakpoint'
-        file = command.breakpoint.attrs.file
-        line = parseInt(command.breakpoint.attrs.line) - 1 # zero-indexed
-        atom.workspace.open(file, initialLine: line)
-          .then (editor) -> console.log(editor)
+      when 'breakpoint', 'suspended'
+        file = command[name].attrs.file
+        line = parseInt(command[name].attrs.line) - 1 # zero-indexed
+        @context.paused(file, line)
+      
       # case 'suspended'           then
       # case 'exception'           then
       # case 'breakpointAdded'     then
