@@ -7,6 +7,7 @@
 
 .ruby-debugger {
   width: 20vw;
+  cursor: default;
   
   .rd-commands {
     .connect {
@@ -20,9 +21,19 @@
     }
   }
   
+  .rd-call-stack {
+    .current {
+      color: @text-color-selected;
+      background-color: @background-color-selected;
+    }
+    
+    .row-no {
+      text-align: right;
+    }
+  }
+  
   .rd-watch-expressions {}
   .rd-variables {}
-  .rd-call-stack {}
   .rd-console {}
   .rd-breakpoints {}
 }

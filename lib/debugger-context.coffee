@@ -5,6 +5,7 @@ module.exports =
 class DebuggerContext
   constructor: ->
     @client = new Client(@)
+    @backtrace = []
     @state = StateMachine.create
       initial: 'disconnected'
       events: [
@@ -46,8 +47,8 @@ class DebuggerContext
     atom.workspace.open(file, initialLine: line)
 
   updateBacktrace: (frames) ->
-    # TODO
-    console.log(frames)
+    # TODO: when to reset to empty? look at how Chrome debugger does it. write some tests maybe
+    @backtrace = frames
 
   play: ->
     if @state.can('start')
