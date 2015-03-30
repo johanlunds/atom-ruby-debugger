@@ -84,3 +84,24 @@ Other: what is difference between "pause" and "interrupt"??
 Other: "thread ..." commands (use together with "backtrace")
 
 Generate Chrome debugger icon font: http://fontastic.me/
+
+```
+case 'exception'           then
+case 'breakpointAdded'     then
+case 'catchpointSet'       then
+case 'variables'           then
+case 'error'               then
+case 'message'             then
+case 'eval'                then
+case 'processingException' then
+
+case 'breakpointDeleted'   then
+case 'breakpointEnabled'   then
+case 'breakpointDisabled'  then
+case 'conditionSet'        then
+case 'expressions'         then
+case 'expressionInfo'      then
+case 'threads'             then
+case 'breakpoints'         then
+case 'loadResult'          then
+```
