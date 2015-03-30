@@ -33,6 +33,9 @@ class Client
   pause: ->
     @runCmd 'pause'
 
+  backtrace: ->
+    @runCmd 'backtrace'
+
   runCmd: (cmd, arg) ->
     if arg
       @socket.write(cmd + " " + arg + "\n")
@@ -44,12 +47,19 @@ class Client
     console.log(util.inspect(command, false, null))
     
     name = Object.keys(command)[0]
+    data = command[name]
     
     switch name
       when 'breakpoint', 'suspended'
-        file = command[name].attrs.file
-        line = parseInt(command[name].attrs.line) - 1 # zero-indexed
+        file = data.attrs.file
+        line = parseInt(data.attrs.line) - 1
         @context.paused(file, line)
+      when 'frames'
+        frames = for entry in data.children
+          attrs = entry.frame.attrs
+          attrs.line = parseInt(attrs.line) - 1
+          attrs
+        @context.updateBacktrace(frames)
 
   # Tear down any state and detach
   destroy: ->

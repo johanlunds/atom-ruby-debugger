@@ -41,9 +41,13 @@ class DebuggerContext
 
   paused: (file, line) ->
     @state.pause()
-    # TODO: request variables, call stack/backtrace etc. open the current file + line
+    @client.backtrace()
+    # TODO: "var global", "var local", "backtrace".
     atom.workspace.open(file, initialLine: line)
-      .then (editor) -> console.log(editor)
+
+  updateBacktrace: (frames) ->
+    # TODO
+    console.log(frames)
 
   play: ->
     if @state.can('start')
