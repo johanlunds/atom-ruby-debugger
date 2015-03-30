@@ -1,5 +1,6 @@
 net = require 'net'
 XmlParser = require './xml-parser'
+_ = require 'underscore-plus'
 
 module.exports =
 class Client
@@ -48,18 +49,24 @@ class Client
     
     name = Object.keys(command)[0]
     data = command[name]
-    
-    switch name
-      when 'breakpoint', 'suspended'
-        file = data.attrs.file
-        line = parseInt(data.attrs.line) - 1
-        @context.paused(file, line)
-      when 'frames'
-        frames = for entry in data.children
-          attrs = entry.frame.attrs
-          attrs.line = parseInt(attrs.line) - 1
-          attrs
-        @context.updateBacktrace(frames)
+    method = "handle" + _.capitalize(name) + "Cmd"
+    @[method]?(data) # ignore not handled cmds
+  
+  handleBreakpointCmd: (data) -> @handleSuspendedCmd(data)
+  
+  # response for 'pause'
+  handleSuspendedCmd: (data) ->
+    file = data.attrs.file
+    line = parseInt(data.attrs.line) - 1
+    @context.paused(file, line)
+
+  # response for 'backtrace'
+  handleFramesCmd: (data) ->
+    frames = for entry in data.children
+      attrs = entry.frame.attrs
+      attrs.line = parseInt(attrs.line) - 1
+      attrs
+    @context.updateBacktrace(frames)
 
   # Tear down any state and detach
   destroy: ->
