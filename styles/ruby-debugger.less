@@ -7,7 +7,20 @@
 
 .ruby-debugger {
   width: 20vw;
+  min-width: 320px;
   cursor: default;
+  height: 100%;
+  display: -webkit-box;
+  display: box;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  
+  .rd-scroll-area {
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    overflow: hidden;
+    overflow-y: auto;
+  }
   
   .rd-commands {
     .connect {
