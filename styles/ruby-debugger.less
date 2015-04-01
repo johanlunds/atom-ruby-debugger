@@ -3,6 +3,7 @@
 // See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
 // for a full listing of what's available.
 @import "ui-variables";
+@import "octicon-mixins";
 @import "./icons";
 
 .ruby-debugger {
@@ -20,6 +21,22 @@
     box-flex: 1;
     overflow: hidden;
     overflow-y: auto;
+  }
+  
+  [rv-toggle-panel] {
+    .panel-heading {
+      .octicon(chevron-down, 12px);
+    }
+    
+    &.collapsed {
+      .panel-heading {
+        .octicon(chevron-right, 12px);
+      }
+      
+      .panel-body {
+        display: none;
+      }
+    }
   }
   
   .rd-commands {

@@ -1,8 +1,25 @@
 rivets = require 'rivets'
+$ = require 'jquery'
+
+rivets.binders['toggle-panel'] =
+  bind: (el) ->
+    @callback = =>
+      value = @observer.value()
+      @observer.setValue(!value)
+
+    $(el).find('.panel-heading').on 'click', @callback
+
+  unbind: (el) ->
+    $(el).find('.panel-heading').off 'click', @callback
+
+  routine: (el, value) ->
+    $(el)[if value then 'removeClass' else 'addClass']('collapsed')
 
 module.exports =
 class MainComponent
   constructor: ({@context}) ->
+    # expand/collapse:
+    @panels = { watchExprs: true, variables: true, callStack: true, console: true, breakpoints: true }
   
   toggleConnect: =>
     if @context.isDisconnected() then @context.connect() else @context.disconnect()

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "javascript-state-machine": "^2.3.5",
+    "jquery": "^2.1.3",
     "rivets": "^0.8.0",
     "sax": "^0.6.1",
     "underscore-plus": "^1.6.6"
