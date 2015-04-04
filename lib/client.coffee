@@ -1,6 +1,7 @@
 net = require 'net'
 XmlParser = require './xml-parser'
 _ = require 'underscore-plus'
+CSON = require 'season'
 
 module.exports =
 class Client
@@ -44,8 +45,7 @@ class Client
       @socket.write(cmd + "\n")
 
   handleCmd: (command) ->
-    util = require('util')
-    console.log(util.inspect(command, false, null))
+    console.log(CSON.stringify(command))
     
     name = Object.keys(command)[0]
     data = command[name]
