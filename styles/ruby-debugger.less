@@ -16,6 +16,7 @@
   -webkit-box-orient: vertical;
   box-orient: vertical;
   -webkit-user-select: none;
+  background-color: @inset-panel-background-color;
   
   .rd-scroll-area {
     -webkit-box-flex: 1;
@@ -27,6 +28,10 @@
   [rv-toggle-panel] {
     .panel-heading {
       .octicon(chevron-down, 12px);
+    }
+    
+    .panel-body {
+      min-height: 2em;
     }
     
     &.collapsed {
