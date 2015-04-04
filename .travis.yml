@@ -12,7 +12,5 @@ install:
   - gem update bundler --no-rdoc --no-ri
   - bundle install
 
-env: INTEGRATION_TESTS_ENABLED=true
-
 script: 
   - curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh
