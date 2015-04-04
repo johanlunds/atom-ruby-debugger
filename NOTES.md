@@ -51,10 +51,6 @@ function! RubyDebugger.receive_command() dict
   call g:RubyDebugger.queue.execute()
 ```
   
-```
-rdebug-vim --file /Users/johan_lunds/.janus/vim-ruby-debugger/tmp/ruby_debugger --output /Users/johan_lunds/.janus/vim-ruby-debugger/tmp/ruby_debugger_output --socket /var/folders/8s/vjkdryl91yx0m9lvgc1ykhqw0000gn/T/v1MiKsq/2 --logger_file /Users/johan_lunds/.janus/vim-ruby-debugger/tmp/ruby_debugger_log --debug_mode 1 --vim_executable mvim --vim_servername VIM --separator ++vim-ruby-debugger-separator++ -- '/Users/johan_lunds/Documents/Kod/apoex2/script/rails' server
-```
-  
 https://github.com/astashov/vim-ruby-debugger/blob/master/src/ruby_debugger/commands.vim
 
 ```
@@ -62,12 +58,6 @@ rdebug-ide --debug --disable-int-handler --evaluation-timeout 10 --rubymine-prot
 ```
 
 ---
-
-TODO: Next add:
-       1. breakpoint disable/enable with row gutter indicators.
-       2. Indicate where debugger is paused by: open current file, make that editor the active one, go/focus/scroll to correct line, add style for current line
-       3. handle client receiving commands from debugger (<breakpoint file="/Users/johan_lunds/Documents/Kod/apoex2/app/controllers/care/authentication_controller.rb" line="18" threadId="1"/>). See vim-ruby-debugger code
-       4. add state/statemachine to Atom plugin: starting, running, paused, quitted/not running
 
 1. add breakpoint ("break file_path:32")
 2. remove breakpoint ("delete N" or perhaps "delete" to delete all and then re-add with "break ...")
@@ -80,7 +70,6 @@ TODO: Next add:
 9. "var local", "var instance <OBJECT>" where object is object id "+0x123abc" or expression ("Rails.env"?), "var global", "var const <CLASS_OR_MODULE>"
 
 Other: what is "jump" used for??
-Other: what is difference between "pause" and "interrupt"??
 Other: "thread ..." commands (use together with "backtrace")
 
 Generate Chrome debugger icon font: http://fontastic.me/
@@ -105,3 +94,15 @@ case 'threads'             then
 case 'breakpoints'         then
 case 'loadResult'          then
 ```
+
+TODO: next up:
+
+1. variables: locals, globals. click in tree to expand ("var inspect +0x..." or "var instance +0x..." ???)
+2. backtrace: "frame N" command to go up/down in backtrace
+3. add/remove breakpoints
+4. step in/out/over
+5. indicate breakpoints + frames visually on editor-lines
+
+* see Trello board (clean up?)
+* write more tests. Integration/feature testing structure!
+* breakpoints in gutter: https://gist.github.com/johanlunds/58519a4d630b9724167e
