@@ -15,6 +15,16 @@ rivets.binders['toggle-panel'] =
   routine: (el, value) ->
     $(el)[if value then 'removeClass' else 'addClass']('collapsed')
 
+# the browser doesn't line break file paths very well. take the matter into our own hands :)
+rivets.formatters.framePathHtml = (frame) ->
+  {file, line} = frame
+  parts = file.split("/")
+  last = parts.pop()
+  parts = parts.map((p) -> p + "/")
+  parts.push(last + ":" + line)
+  items = parts.map((p) -> "<li>#{p}</li>").join("")
+  "<ul>#{items}</ul>"
+
 module.exports =
 class MainComponent
   constructor: ({@context}) ->

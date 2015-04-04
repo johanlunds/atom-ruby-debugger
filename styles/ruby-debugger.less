@@ -15,6 +15,7 @@
   display: box;
   -webkit-box-orient: vertical;
   box-orient: vertical;
+  -webkit-user-select: none;
   
   .rd-scroll-area {
     -webkit-box-flex: 1;
@@ -52,13 +53,51 @@
   }
   
   .rd-call-stack {
-    .current {
-      color: @text-color-selected;
-      background-color: @background-color-selected;
+    table {
+      table-layout: fixed;
+      width: 100%;
+    }
+    
+    // stripes
+    tr:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    td {
+      vertical-align: baseline;
     }
     
     .row-no {
+      width: 25px;
+      padding-right: 5px;
       text-align: right;
+    }
+    
+    .row-file {
+      font-family: monospace;
+    }
+
+    ul, li {
+      margin: 0;
+      padding: 0;
+    }
+    
+    li {
+      list-style: none;
+      display: inline-block;
+      color: darken(@text-color, 15%)
+    }
+    
+    // make "commands.rb:32" stand out a bit more
+    li:last-child {
+      color: @text-color-selected;
+    }
+    
+    .current {
+      td, li {
+        color: @text-color-selected;
+        background-color: @background-color-selected;
+      }
     }
   }
   
