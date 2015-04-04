@@ -38,7 +38,7 @@ describe "Connecting to rdebug-ide", ->
         workspaceElement.querySelector('.ruby-debugger .connect').click()
 
       waitsFor ->
-        workspaceElement.querySelector('.ruby-debugger .connect').textContent == 'Disconnect'
+        workspaceElement.querySelector('.ruby-debugger .connect').textContent.trim() == 'Disconnect'
 
       runs ->
         # 6. Start button should now be active
