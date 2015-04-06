@@ -44,7 +44,7 @@ class DebuggerContext
     @state.pause()
     @client.backtrace()
     # TODO: "var global", "var local", "backtrace".
-    atom.workspace.open(file, initialLine: line)
+    atom.workspace.open(file, initialLine: line - 1)
 
   updateBacktrace: (frames) ->
     # TODO: when to reset to empty? look at how Chrome debugger does it. write some tests maybe

@@ -57,14 +57,14 @@ class Client
   # response for 'pause'
   handleSuspendedCmd: (data) ->
     file = data.attrs.file
-    line = parseInt(data.attrs.line) - 1
+    line = parseInt(data.attrs.line)
     @context.paused(file, line)
 
   # response for 'backtrace'
   handleFramesCmd: (data) ->
     frames = for entry in data.children
       attrs = entry.frame.attrs
-      attrs.line = parseInt(attrs.line) - 1
+      attrs.line = parseInt(attrs.line)
       attrs
     @context.updateBacktrace(frames)
 

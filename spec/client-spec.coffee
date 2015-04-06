@@ -38,13 +38,13 @@ describe "Client", ->
           {
             no: "1"
             file: "/usr/local/var/rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/eventmachine-1.0.4/lib/em/timers.rb"
-            line: 54
+            line: 55
             current: "true"
           }
           {
             no: "2"
             file: "/usr/local/var/rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/eventmachine-1.0.4/lib/eventmachine.rb"
-            line: 186
+            line: 187
           }
         ])
         
@@ -64,5 +64,5 @@ describe "Client", ->
         expect(@context.paused).toHaveBeenCalled()
         expect(@context.paused.mostRecentCall.args).toEqual([
           "/usr/local/var/rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/eventmachine-1.0.4/lib/em/timers.rb"
-          54
+          55
         ])
