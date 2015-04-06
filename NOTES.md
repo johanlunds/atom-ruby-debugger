@@ -98,10 +98,19 @@ case 'loadResult'          then
 TODO: next up:
 
 1. variables: locals, globals. click in tree to expand ("var inspect +0x..." or "var instance +0x..." ???)
-2. backtrace: "frame N" command to go up/down in backtrace
-3. add/remove breakpoints
-4. step in/out/over
-5. indicate breakpoints + frames visually on editor-lines
+2. make panel width resizable (like tree-view does it)
+3. backtrace: "frame N" command to go up/down in backtrace
+4. add/remove breakpoints (context menu, command panel. extra: click in gutter)
+5. step in/out/over
+6. indicate breakpoints + frames visually on editor-lines
+7. console
+8. list breakpoints in panel
+9. watch expressions
+10. deactivate all breakpoints-button
+11. Exception-handling (research!)
+12. hover over variables in text editor shows inspect-popover
+13. conditional breakpoints
+14. CONTINUE TO HERE!
 
 * see Trello board (clean up?)
 * write more tests. Integration/feature testing structure!
