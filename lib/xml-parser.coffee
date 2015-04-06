@@ -37,11 +37,11 @@ class XmlParser
     @parser.onclosetag = (name) =>
       # closed a tag. "name" is tag name
       node = stack.pop()
-      result = {}
       object = {}
       object.attrs = node.attributes if Object.keys(node.attributes).length
       object.children = node.children if node.children?.length
       object.text = node.text if node.text
+      result = {}
       result[node.name] = object
       if stack.length == 1
         @events.emit 'command', result
