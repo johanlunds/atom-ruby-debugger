@@ -46,6 +46,8 @@
   }
   
   .rd-commands {
+    white-space: nowrap;
+    
     .connect {
       width: 80px;
     }
@@ -99,9 +101,13 @@
     }
     
     .current {
-      td, li {
+      td {
         color: @text-color-selected;
         background-color: @background-color-selected;
+      }
+      
+      li {
+        color: @text-color-selected;
       }
     }
   }
