@@ -1,0 +1,14 @@
+variables:
+  children: [
+    {
+      variable:
+        attrs:
+          name: "self"
+          compactValue: "#<ActiveRecord::ConnectionAdapters::PostgreSQLAd..."
+          kind: "local"
+          value: "#<ActiveRecord::ConnectionAdapters::PostgreSQLAdapter:0x007ff2539479e0>"
+          type: "ActiveRecord::ConnectionAdapters::PostgreSQLAdapter"
+          hasChildren: "true"
+          objectId: "+0x3ff929ca3cf0"
+    }
+  ]

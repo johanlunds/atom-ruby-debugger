@@ -1,11 +1,14 @@
-Client = require './client'
 StateMachine = require 'javascript-state-machine'
+q = require 'q'
+Client = require './client'
 
 module.exports =
 class DebuggerContext
   constructor: ->
-    @client = new Client(@)
+    @client = new Client()
     @backtrace = []
+    @locals = []
+    @globals = []
     @state = StateMachine.create
       initial: 'disconnected'
       events: [
@@ -15,19 +18,10 @@ class DebuggerContext
         { name: 'continue',   from: 'paused',       to: 'running' }
         { name: 'disconnect', from: '*',            to: 'disconnected' }
       ]
-  
-  connect: =>
-    @client.connect()
-    
-  disconnect: =>
-    @client.disconnect()
-    
-  connected: ->
-    @state.connect()
-    
-  disconnected: ->
-    @state.disconnect()
-    
+
+    @client.onPaused (args...) => @paused(args...)
+    @client.onDisconnected => @disconnected()
+
   isConnected: =>
     not @isDisconnected()
     
@@ -37,18 +31,35 @@ class DebuggerContext
   isRunning: ->
     @state.is('running')
   
+  connect: =>
+    @client
+      .connect()
+      .then => @state.connect()
+      .catch (e) ->
+        # most probably "Error: connect ECONNREFUSED 127.0.0.1:1234" because rdebug-ide hasn't been started
+        atom.notifications.addError e.toString(), dismissable: true
+    
+  disconnect: =>
+    @client.disconnect()
+    
+  disconnected: ->
+    @state.disconnect()
+    
   pause: ->
     @client.pause()
 
-  paused: (file, line) ->
+  # TODO: when to reset @backtrace etc to be empty? look at how Chrome debugger does it. maybe write some tests
+  paused: (breakpoint) ->
     @state.pause()
-    @client.backtrace()
-    # TODO: "var global", "var local", "backtrace".
-    atom.workspace.open(file, initialLine: line - 1)
-
-  updateBacktrace: (frames) ->
-    # TODO: when to reset to empty? look at how Chrome debugger does it. write some tests maybe
-    @backtrace = frames
+    atom.workspace.open(breakpoint.file, initialLine: breakpoint.line - 1)
+    
+    q.all([
+      @client.backtrace()
+      @client.localVariables()
+      @client.globalVariables()
+    ])
+    .then ([@backtrace, @locals, @globals]) => null
+    .done()
 
   play: ->
     if @state.can('start')

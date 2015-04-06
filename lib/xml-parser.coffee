@@ -61,4 +61,7 @@ class XmlParser
   onCommand: (cb) ->
     @events.on 'command', cb
     
+  destroy: ->
+    @events.removeAllListeners()
+    
     

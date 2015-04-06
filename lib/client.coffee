@@ -1,42 +1,74 @@
 net = require 'net'
-XmlParser = require './xml-parser'
 _ = require 'underscore-plus'
 CSON = require 'season'
+q = require 'q'
+{EventEmitter} = require 'events'
+XmlParser = require './xml-parser'
 
 module.exports =
 class Client
-  constructor: (@context) ->
+  constructor: ->
     @host = '127.0.0.1'
     @port = atom.config.get('ruby-debugger.port') or 1234
     @socket = null
+    @events = new EventEmitter()
+    @deferreds = []
     @cmdParser = new XmlParser()
     @cmdParser.onCommand (command) => @handleCmd(command)
+  
+  onDisconnected: (cb) ->
+    @events.on 'disconnected', cb
     
+  onPaused: (cb) ->
+    @events.on 'paused', cb
+
+  # Returns Promise
   connect: ->
-    @socket = new net.Socket()
-    @socket.connect @port, @host, =>
-      @context.connected()
+    deferred = q.defer()
+    @socket = net.connect @port, @host
+    @socket.on 'connect', =>
+      deferred.resolve()
+    @socket.on 'error', (e) =>
+      deferred.reject(e)
     @socket.on 'data', (data) =>
       console.log 'Received: ' + data
       @cmdParser.write(data.toString())
     @socket.on 'close', =>
       @socket = null
-      @context.disconnected()
+      @events.emit 'disconnected'
+    deferred.promise
 
+  # Will trigger event 'disconnected'.
+  #
+  # Returns null
   disconnect: ->
-    @socket?.end()
+    @runCmd 'exit'
 
+  # Returns null
   start: ->
     @runCmd 'start'
 
+  # Returns null
   continue: ->
     @runCmd 'cont'
 
+  # Will trigger event 'paused'.
+  #
+  # Returns null
   pause: ->
     @runCmd 'pause'
 
+  # Returns Promise
   backtrace: ->
-    @runCmd 'backtrace'
+    @runCmdWithResponse 'backtrace'
+  
+  # Returns Promise
+  localVariables: ->
+    @runCmdWithResponse 'var local'
+    
+  # Returns Promise
+  globalVariables: ->
+    @runCmdWithResponse 'var global'
 
   runCmd: (cmd, arg) ->
     if arg
@@ -44,6 +76,12 @@ class Client
     else
       @socket.write(cmd + "\n")
 
+  runCmdWithResponse: ->
+    @deferreds.push deferred = q.defer()
+    @runCmd arguments...
+    deferred.promise
+  
+  # Will resolve a Promise or emit an appropriate event.
   handleCmd: (command) ->
     console.log(CSON.stringify(command))
     
@@ -52,13 +90,15 @@ class Client
     method = "handle" + _.capitalize(name) + "Cmd"
     @[method]?(data) # ignore not handled cmds
   
-  handleBreakpointCmd: (data) -> @handleSuspendedCmd(data)
+  handleBreakpointCmd: (data) ->
+    @handleSuspendedCmd(data)
   
   # response for 'pause'
   handleSuspendedCmd: (data) ->
     file = data.attrs.file
     line = parseInt(data.attrs.line)
-    @context.paused(file, line)
+    breakpoint = {file, line}
+    @events.emit 'paused', breakpoint
 
   # response for 'backtrace'
   handleFramesCmd: (data) ->
@@ -66,10 +106,20 @@ class Client
       attrs = entry.frame.attrs
       attrs.line = parseInt(attrs.line)
       attrs
-    @context.updateBacktrace(frames)
+    @deferreds.shift().resolve(frames)
+
+  # response for 'var local', 'var global'
+  handleVariablesCmd: (data) ->
+    vars = for entry in (data.children or [])
+      attrs = entry.variable.attrs
+      attrs.hasChildren = attrs.hasChildren is 'true'
+      attrs
+    @deferreds.shift().resolve(vars)
 
   # Tear down any state and detach
   destroy: ->
-    # TODO: stop the debugger when closing project/editor & other events (which?). this method seems to only be run on Atom exit?
+    # TODO: stop the debugger (running "exit") when closing project/editor or toggling debugger panel. this method seems to only be run on Atom exit?
+    @events.removeAllListeners()
+    @cmdParser.destroy()
     @socket?.end()
 

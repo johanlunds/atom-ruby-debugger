@@ -1,0 +1,660 @@
+variables:
+  children: [
+    {
+      variable:
+        attrs:
+          name: "$!"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$\""
+          compactValue: "[\"enumerator.so\", \"rational.so\", \"complex.so\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/x86_64-darwin14/enc/encdb.bundle\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/x86_64-darwin14/enc/trans/transdb.bundle\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/unicode_normalize.rb\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/x86_64-darwin14/rbconfig.rb\", \"thread.rb\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/x86_64-darwin14/thread.bundle\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/rubygems/compatibility.rb\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/rubygems/defaults.rb\"]"
+          kind: "global"
+          value: "Array (1979 elements)"
+          type: "Array"
+          hasChildren: "true"
+          objectId: "+0x3ff929861f20"
+    }
+    {
+      variable:
+        attrs:
+          name: "$$"
+          kind: "global"
+          value: "8657"
+          type: "Fixnum"
+          hasChildren: "false"
+          objectId: "+0x43a3"
+    }
+    {
+      variable:
+        attrs:
+          name: "$&"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$'"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$*"
+          compactValue: "[]"
+          kind: "global"
+          value: "Empty Array"
+          type: "Array"
+          hasChildren: "false"
+          objectId: "+0x3ff9298650f8"
+    }
+    {
+      variable:
+        attrs:
+          name: "$+"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$,"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-0"
+          kind: "global"
+          value: "\\n"
+          type: "String"
+          hasChildren: "true"
+          objectId: "+0x3ff9298656ac"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-F"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-I"
+          compactValue: "[\"/Users/johan_lunds/Documents/Kod/nutrition/lib\", \"/Users/johan_lunds/Documents/Kod/nutrition/vendor\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/assets\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/controllers\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/helpers\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/mailers\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/models\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/controllers/concerns\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/models/concerns\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/jasmine-rails-0.10.6/lib\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/jasmine-rails-0.10.6/app/controllers\"]"
+          kind: "global"
+          value: "Array (145 elements)"
+          type: "Array"
+          hasChildren: "true"
+          objectId: "+0x3ff929861f84"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-W"
+          kind: "global"
+          value: "1"
+          type: "Fixnum"
+          hasChildren: "false"
+          objectId: "+0x3"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-a"
+          kind: "global"
+          value: "false"
+          type: "FalseClass"
+          hasChildren: "false"
+          objectId: "+0"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-d"
+          kind: "global"
+          value: "false"
+          type: "FalseClass"
+          hasChildren: "false"
+          objectId: "+0"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-i"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-l"
+          kind: "global"
+          value: "false"
+          type: "FalseClass"
+          hasChildren: "false"
+          objectId: "+0"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-p"
+          kind: "global"
+          value: "false"
+          type: "FalseClass"
+          hasChildren: "false"
+          objectId: "+0"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-v"
+          kind: "global"
+          value: "false"
+          type: "FalseClass"
+          hasChildren: "false"
+          objectId: "+0"
+    }
+    {
+      variable:
+        attrs:
+          name: "$-w"
+          kind: "global"
+          value: "false"
+          type: "FalseClass"
+          hasChildren: "false"
+          objectId: "+0"
+    }
+    {
+      variable:
+        attrs:
+          name: "$."
+          kind: "global"
+          value: "5"
+          type: "Fixnum"
+          hasChildren: "false"
+          objectId: "+0xb"
+    }
+    {
+      variable:
+        attrs:
+          name: "$/"
+          kind: "global"
+          value: "\\n"
+          type: "String"
+          hasChildren: "true"
+          objectId: "+0x3ff9298656ac"
+    }
+    {
+      variable:
+        attrs:
+          name: "$0"
+          compactValue: "/Users/johan_lunds/Documents/Kod/nutrition/bin/r..."
+          kind: "global"
+          value: "/Users/johan_lunds/Documents/Kod/nutrition/bin/rails"
+          type: "String"
+          hasChildren: "true"
+          objectId: "+0x3ff929855ea0"
+    }
+    {
+      variable:
+        attrs:
+          name: "$1"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$2"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$3"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$4"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$5"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$6"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$7"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$8"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$9"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$:"
+          compactValue: "[\"/Users/johan_lunds/Documents/Kod/nutrition/lib\", \"/Users/johan_lunds/Documents/Kod/nutrition/vendor\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/assets\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/controllers\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/helpers\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/mailers\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/models\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/controllers/concerns\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/models/concerns\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/jasmine-rails-0.10.6/lib\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/jasmine-rails-0.10.6/app/controllers\"]"
+          kind: "global"
+          value: "Array (145 elements)"
+          type: "Array"
+          hasChildren: "true"
+          objectId: "+0x3ff929861f84"
+    }
+    {
+      variable:
+        attrs:
+          name: "$;"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$<"
+          kind: "global"
+          value: "ARGF"
+          type: "ARGF.class"
+          hasChildren: "false"
+          objectId: "+0x3ff92986510c"
+    }
+    {
+      variable:
+        attrs:
+          name: "$>"
+          kind: "global"
+          value: "#<IO:0x007ff2530ca510>"
+          type: "IO"
+          hasChildren: "false"
+          objectId: "+0x3ff929865288"
+    }
+    {
+      variable:
+        attrs:
+          name: "$?"
+          kind: "global"
+          value: "pid 8684 exit 0"
+          type: "Process::Status"
+          hasChildren: "false"
+          objectId: "+0x3ff92bfde3b4"
+    }
+    {
+      variable:
+        attrs:
+          name: "$@"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$ARGV"
+          compactValue: "[]"
+          kind: "global"
+          value: "Empty Array"
+          type: "Array"
+          hasChildren: "false"
+          objectId: "+0x3ff9298650f8"
+    }
+    {
+      variable:
+        attrs:
+          name: "$CGI_ENV"
+          kind: "global"
+          value: "ENV"
+          type: "Object"
+          hasChildren: "false"
+          objectId: "+0x3ff929868730"
+    }
+    {
+      variable:
+        attrs:
+          name: "$CHILD_STATUS"
+          kind: "global"
+          value: "pid 8684 exit 0"
+          type: "Process::Status"
+          hasChildren: "false"
+          objectId: "+0x3ff92bfde3b4"
+    }
+    {
+      variable:
+        attrs:
+          name: "$DAEMONS_ARGV"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$DEBUG"
+          kind: "global"
+          value: "false"
+          type: "FalseClass"
+          hasChildren: "false"
+          objectId: "+0"
+    }
+    {
+      variable:
+        attrs:
+          name: "$DEFAULT_INPUT"
+          kind: "global"
+          value: "ARGF"
+          type: "ARGF.class"
+          hasChildren: "false"
+          objectId: "+0x3ff92986510c"
+    }
+    {
+      variable:
+        attrs:
+          name: "$DEFAULT_OUTPUT"
+          kind: "global"
+          value: "#<IO:0x007ff2530ca510>"
+          type: "IO"
+          hasChildren: "false"
+          objectId: "+0x3ff929865288"
+    }
+    {
+      variable:
+        attrs:
+          name: "$ERROR_INFO"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$ERROR_POSITION"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$FIELD_SEPARATOR"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$FS"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$INPUT_LINE_NUMBER"
+          kind: "global"
+          value: "5"
+          type: "Fixnum"
+          hasChildren: "false"
+          objectId: "+0xb"
+    }
+    {
+      variable:
+        attrs:
+          name: "$INPUT_RECORD_SEPARATOR"
+          kind: "global"
+          value: "\\n"
+          type: "String"
+          hasChildren: "true"
+          objectId: "+0x3ff9298656ac"
+    }
+    {
+      variable:
+        attrs:
+          name: "$LAST_MATCH_INFO"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$LAST_PAREN_MATCH"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$LAST_READ_LINE"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$LOADED_FEATURES"
+          compactValue: "[\"enumerator.so\", \"rational.so\", \"complex.so\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/x86_64-darwin14/enc/encdb.bundle\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/x86_64-darwin14/enc/trans/transdb.bundle\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/unicode_normalize.rb\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/x86_64-darwin14/rbconfig.rb\", \"thread.rb\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/x86_64-darwin14/thread.bundle\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/rubygems/compatibility.rb\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/2.2.0/rubygems/defaults.rb\"]"
+          kind: "global"
+          value: "Array (1979 elements)"
+          type: "Array"
+          hasChildren: "true"
+          objectId: "+0x3ff929861f20"
+    }
+    {
+      variable:
+        attrs:
+          name: "$LOAD_PATH"
+          compactValue: "[\"/Users/johan_lunds/Documents/Kod/nutrition/lib\", \"/Users/johan_lunds/Documents/Kod/nutrition/vendor\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/assets\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/controllers\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/helpers\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/mailers\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/models\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/controllers/concerns\", \"/Users/johan_lunds/Documents/Kod/nutrition/app/models/concerns\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/jasmine-rails-0.10.6/lib\", \"/usr/local/var/rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/jasmine-rails-0.10.6/app/controllers\"]"
+          kind: "global"
+          value: "Array (145 elements)"
+          type: "Array"
+          hasChildren: "true"
+          objectId: "+0x3ff929861f84"
+    }
+    {
+      variable:
+        attrs:
+          name: "$MATCH"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$NR"
+          kind: "global"
+          value: "5"
+          type: "Fixnum"
+          hasChildren: "false"
+          objectId: "+0xb"
+    }
+    {
+      variable:
+        attrs:
+          name: "$OFS"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$ORS"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$OUTPUT_FIELD_SEPARATOR"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$OUTPUT_RECORD_SEPARATOR"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$PID"
+          kind: "global"
+          value: "8657"
+          type: "Fixnum"
+          hasChildren: "false"
+          objectId: "+0x43a3"
+    }
+    {
+      variable:
+        attrs:
+          name: "$POSTMATCH"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$PREMATCH"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$PROCESS_ID"
+          kind: "global"
+          value: "8657"
+          type: "Fixnum"
+          hasChildren: "false"
+          objectId: "+0x43a3"
+    }
+    {
+      variable:
+        attrs:
+          name: "$PROGRAM_NAME"
+          compactValue: "/Users/johan_lunds/Documents/Kod/nutrition/bin/r..."
+          kind: "global"
+          value: "/Users/johan_lunds/Documents/Kod/nutrition/bin/rails"
+          type: "String"
+          hasChildren: "true"
+          objectId: "+0x3ff929855ea0"
+    }
+    {
+      variable:
+        attrs:
+          name: "$RS"
+          kind: "global"
+          value: "\\n"
+          type: "String"
+          hasChildren: "true"
+          objectId: "+0x3ff9298656ac"
+    }
+    {
+      variable:
+        attrs:
+          name: "$SAFE"
+          kind: "global"
+          value: "0"
+          type: "Fixnum"
+          hasChildren: "false"
+          objectId: "+0x1"
+    }
+    {
+      variable:
+        attrs:
+          name: "$VERBOSE"
+          kind: "global"
+          value: "false"
+          type: "FalseClass"
+          hasChildren: "false"
+          objectId: "+0"
+    }
+    {
+      variable:
+        attrs:
+          name: "$\\"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$_"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$`"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$binding"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$daemons_sigterm"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$daemons_stop_proc"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$fileutils_rb_have_lchmod"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$fileutils_rb_have_lchown"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$jruby_version"
+          kind: "global"
+    }
+    {
+      variable:
+        attrs:
+          name: "$stderr"
+          kind: "global"
+          value: "#<IO:0x007ff2530ca498>"
+          type: "IO"
+          hasChildren: "false"
+          objectId: "+0x3ff92986524c"
+    }
+    {
+      variable:
+        attrs:
+          name: "$stdin"
+          kind: "global"
+          value: "#<IO:0x007ff2530ca588>"
+          type: "IO"
+          hasChildren: "false"
+          objectId: "+0x3ff9298652c4"
+    }
+    {
+      variable:
+        attrs:
+          name: "$stdout"
+          kind: "global"
+          value: "#<IO:0x007ff2530ca510>"
+          type: "IO"
+          hasChildren: "false"
+          objectId: "+0x3ff929865288"
+    }
+    {
+      variable:
+        attrs:
+          name: "$~"
+          kind: "global"
+    }
+  ]

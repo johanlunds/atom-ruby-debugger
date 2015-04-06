@@ -1,6 +1,6 @@
+{CompositeDisposable} = require 'atom'
 View = require './view'
 DebuggerContext = require './debugger-context'
-{CompositeDisposable} = require 'atom'
 
 module.exports =
 class RubyDebugger

@@ -1,5 +1,7 @@
 {startDebuggerProcess} = require '../spec-helper'
 
+# TODO: add test for backtrace here (need breakpoint add/remove support though)
+# TODO: add test for local/global variables
 describe "Connecting to rdebug-ide", ->
   
   [workspaceElement, activationPromise, file, process] = []
@@ -12,7 +14,7 @@ describe "Connecting to rdebug-ide", ->
   afterEach ->
     process.kill()
   
-  describe "activating package and connecting to a started instance of rdebug-ide", ->
+  describe "when activating package and connecting to a started instance of rdebug-ide", ->
     it "enables the play button", ->
       
       # 1. start rdebug-ide with Ruby-script
