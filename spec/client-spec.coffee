@@ -106,10 +106,6 @@ describe "Client", ->
       @client.backtrace()
       expect(@socket.write).toHaveBeenCalledWith("backtrace\n")
 
-    it "runs command 'setBreakpoint'", ->
-      @client.setBreakpoint('/script.rb', '1')
-      expect(@socket.write).toHaveBeenCalledWith("break /script.rb:1\n")
-
     it "returns and resolves a Promise to an array of frames", ->
       result = null
       runs ->
@@ -131,6 +127,11 @@ describe "Client", ->
             line: 187
           }
         ])
+
+  describe "::addBreakpoint", ->
+    it "runs command 'breakpoint ./fixtures/simple.rb:1'", ->
+      @client.addBreakpoint "./fixtures/simple.rb", "1"
+      expect(@socket.write).toHaveBeenCalledWith("break ./fixtures/simple.rb:1\n")
 
   describe "::handleCmd", ->
     describe "when suspended", ->

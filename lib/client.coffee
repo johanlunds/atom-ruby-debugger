@@ -63,7 +63,7 @@ class Client
     @runCmdWithResponse 'backtrace'
 
   # Returns Promise
-  setBreakpoint: (scriptPath, lineNumber) ->
+  addBreakpoint: (scriptPath, lineNumber) ->
     @runCmdWithResponse 'break', "#{scriptPath}:#{lineNumber}"
 
   # Returns Promise
@@ -93,6 +93,11 @@ class Client
     data = command[name]
     method = "handle" + _.capitalize(name) + "Cmd"
     @[method]?(data) # ignore not handled cmds
+
+  handleBreakpointAddedCmd: (data) ->
+    num = data.attrs.no
+    location = data.attrs.location
+    @events.emit 'breakpointAdded',num,location
 
   handleBreakpointCmd: (data) ->
     @handleSuspendedCmd(data)
