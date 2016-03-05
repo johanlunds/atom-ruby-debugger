@@ -15,10 +15,10 @@ class Client
     @deferreds = []
     @cmdParser = new XmlParser()
     @cmdParser.onCommand (command) => @handleCmd(command)
-  
+
   onDisconnected: (cb) ->
     @events.on 'disconnected', cb
-    
+
   onPaused: (cb) ->
     @events.on 'paused', cb
 
@@ -61,11 +61,15 @@ class Client
   # Returns Promise
   backtrace: ->
     @runCmdWithResponse 'backtrace'
-  
+
+  # Returns Promise
+  setBreakpoint: (scriptPath, lineNumber) ->
+    @runCmdWithResponse 'break', "#{scriptPath}:#{lineNumber}"
+
   # Returns Promise
   localVariables: ->
     @runCmdWithResponse 'var local'
-    
+
   # Returns Promise
   globalVariables: ->
     @runCmdWithResponse 'var global'
@@ -80,19 +84,19 @@ class Client
     @deferreds.push deferred = q.defer()
     @runCmd arguments...
     deferred.promise
-  
+
   # Will resolve a Promise or emit an appropriate event.
   handleCmd: (command) ->
     console.log(CSON.stringify(command))
-    
+
     name = Object.keys(command)[0]
     data = command[name]
     method = "handle" + _.capitalize(name) + "Cmd"
     @[method]?(data) # ignore not handled cmds
-  
+
   handleBreakpointCmd: (data) ->
     @handleSuspendedCmd(data)
-  
+
   # response for 'pause'
   handleSuspendedCmd: (data) ->
     file = data.attrs.file
@@ -122,4 +126,3 @@ class Client
     @events.removeAllListeners()
     @cmdParser.destroy()
     @socket?.end()
-
