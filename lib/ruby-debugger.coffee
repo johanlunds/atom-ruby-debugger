@@ -14,6 +14,7 @@ class RubyDebugger
 
     # Register command that toggles this view
     @subscriptions.add atom.commands.add 'atom-workspace', 'ruby-debugger:toggle': => @toggle()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'ruby-debugger:add-breakpoint': => @addBreakpoint()
 
   destroy: ->
     @panel.destroy()
@@ -29,3 +30,9 @@ class RubyDebugger
       @panel.hide()
     else
       @panel.show()
+
+  addBreakpoint: ->
+    if @context.isConnected()
+      scopeDescriptor = Cursor::getScopeDescriptor
+      @context.client.addBreakpoint
+    else
