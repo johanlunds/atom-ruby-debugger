@@ -97,6 +97,7 @@ class Client
   handleBreakpointAddedCmd: (data) ->
     num = data.attrs.no
     location = data.attrs.location
+    @deferreds.shift().resolve(data)
     @events.emit 'breakpointAdded',num,location
 
   handleBreakpointCmd: (data) ->

@@ -129,9 +129,23 @@ describe "Client", ->
         ])
 
   describe "::addBreakpoint", ->
+    beforeEach ->
+      @response = CSON.readFileSync(require.resolve './fixtures/add_breakpoint.cson')
+      @emptyResponse = CSON.readFileSync(require.resolve './fixtures/var_locals_empty.cson')
+
     it "runs command 'breakpoint ./fixtures/simple.rb:1'", ->
       @client.addBreakpoint "./fixtures/simple.rb", "1"
       expect(@socket.write).toHaveBeenCalledWith("break ./fixtures/simple.rb:1\n")
+
+    it "returns and resolves a Promise to a breakpoint", ->
+      result = null
+      runs ->
+        @client.addBreakpoint("./fixtures/simple.rb", "1").then (arg) -> result = arg
+        @client.handleCmd(@response)
+      waitsFor "resolve", ->
+        result
+      runs ->
+        expect(result).toEqual({ attrs : { no : '1', location : 'fixtures/simple.rb:1' } })
 
   describe "::handleCmd", ->
     describe "when suspended", ->
