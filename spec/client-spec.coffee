@@ -13,7 +13,7 @@ describe "Client", ->
     beforeEach ->
       @response = CSON.readFileSync(require.resolve './fixtures/var_locals.cson')
       @emptyResponse = CSON.readFileSync(require.resolve './fixtures/var_locals_empty.cson')
-      
+
     it "runs command 'var local'", ->
       @client.localVariables()
       expect(@socket.write).toHaveBeenCalledWith("var local\n")
@@ -65,7 +65,7 @@ describe "Client", ->
     it "runs command 'var global'", ->
       @client.globalVariables()
       expect(@socket.write).toHaveBeenCalledWith("var global\n")
-      
+
     it "returns and resolves a Promise to an array of variables", ->
       result = null
       runs ->
@@ -101,7 +101,7 @@ describe "Client", ->
                   line: "187"
             }
           ]
-    
+
     it "runs command 'backtrace'", ->
       @client.backtrace()
       expect(@socket.write).toHaveBeenCalledWith("backtrace\n")
@@ -128,6 +128,25 @@ describe "Client", ->
           }
         ])
 
+  describe "::addBreakpoint", ->
+    beforeEach ->
+      @response = CSON.readFileSync(require.resolve './fixtures/add_breakpoint.cson')
+      @emptyResponse = CSON.readFileSync(require.resolve './fixtures/var_locals_empty.cson')
+
+    it "runs command 'breakpoint ./fixtures/simple.rb:1'", ->
+      @client.addBreakpoint "./fixtures/simple.rb", "1"
+      expect(@socket.write).toHaveBeenCalledWith("break ./fixtures/simple.rb:1\n")
+
+    it "returns and resolves a Promise to a breakpoint", ->
+      result = null
+      runs ->
+        @client.addBreakpoint("./fixtures/simple.rb", "1").then (arg) -> result = arg
+        @client.handleCmd(@response)
+      waitsFor "resolve", ->
+        result
+      runs ->
+        expect(result).toEqual({ attrs : { no : '1', location : 'fixtures/simple.rb:1' } })
+
   describe "::handleCmd", ->
     describe "when suspended", ->
       beforeEach ->
@@ -138,7 +157,7 @@ describe "Client", ->
               line: "55"
               threadId: "1"
               frames: "21"
-      
+
       it "emits event 'paused' with breakpoint-argument", ->
         cb = jasmine.createSpy('callback')
         @client.onPaused(cb)
@@ -147,4 +166,3 @@ describe "Client", ->
         expect(cb).toHaveBeenCalledWith
           file: "/usr/local/var/rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/eventmachine-1.0.4/lib/em/timers.rb"
           line: 55
-        

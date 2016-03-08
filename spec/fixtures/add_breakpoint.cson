@@ -1,0 +1,4 @@
+breakpointAdded:
+  attrs:
+    no:"1"
+    location:"fixtures/simple.rb:1"
