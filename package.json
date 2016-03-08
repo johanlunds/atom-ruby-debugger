@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "description": "Provides a small Ruby-debugger in Atom",
   "activationCommands": {
-    "atom-workspace": "ruby-debugger:toggle"
+    "atom-workspace": "ruby-debugger:toggle",
+    "atom-workspace": "ruby-debugger:add-breakpoint"
   },
   "repository": "https://github.com/johanlunds/atom-ruby-debugger",
   "license": "MIT",
