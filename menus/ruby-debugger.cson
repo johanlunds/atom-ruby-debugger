@@ -6,7 +6,7 @@
       'command': 'ruby-debugger:toggle'
     },
     {
-      'label': 'Add ruby Breakpoint'
+      'label': 'Set a Ruby-debugger Breakpoint'
       'command': 'ruby-debugger:add-breakpoint'
     }
   ]
