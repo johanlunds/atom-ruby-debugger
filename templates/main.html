@@ -39,6 +39,24 @@
   <div class="inset-panel rd-variables" rv-toggle-panel="panels.variables">
     <div class="panel-heading">Variables</div>
     <div class="panel-body">
+      
+      <div rv-show="context.locals | isPresent">
+        <h3>Locals</h3>
+        <ul>
+          <li rv-each-var="context.locals">
+            <rd-variable-tree var="var"></rd-variable-tree>
+          </li>
+        </ul>
+      </div>
+      
+      <div rv-show="context.globals | isPresent">
+        <h3>Globals</h3>
+        <ul>
+          <li rv-each-var="context.globals">
+            <rd-variable-tree var="var"></rd-variable-tree>
+          </li>
+        </ul>
+      </div>
 
     </div>
   </div>

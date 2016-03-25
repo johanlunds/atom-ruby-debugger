@@ -48,7 +48,7 @@ class DebuggerContext
   pause: ->
     @client.pause()
 
-  # TODO: when to reset @backtrace etc to be empty? look at how Chrome debugger does it. maybe write some tests
+  # TODO: this: when to reset @backtrace etc to be empty? look at how Chrome debugger does it. maybe write some tests
   paused: (breakpoint) ->
     @state.pause()
     atom.workspace.open(breakpoint.file, initialLine: breakpoint.line - 1)
@@ -58,7 +58,11 @@ class DebuggerContext
       @client.localVariables()
       @client.globalVariables()
     ])
-    .then ([@backtrace, @locals, @globals]) => null
+    .then (result) =>
+      # FIXME: must reset to empty array first, because it will throw errors from
+      # Rivets.js' binders otherwise (probably a bug). investigate and report.
+      [@backtrace, @locals, @globals] = [[], [], []]
+      [@backtrace, @locals, @globals] = result
     .done()
 
   play: ->

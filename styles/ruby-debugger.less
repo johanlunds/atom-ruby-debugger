@@ -112,8 +112,19 @@
     }
   }
   
+  .rd-variables {
+    .rd-var-show-children {
+      &.has-children {
+        .octicon(chevron-right, 12px);
+      }
+      
+      &.expanded {
+        .octicon(chevron-down, 12px);
+      }
+    }
+  }
+  
   .rd-watch-expressions {}
-  .rd-variables {}
   .rd-console {}
   .rd-breakpoints {}
 }

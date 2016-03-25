@@ -1,0 +1,39 @@
+variables:
+  children: [
+    {
+      variable:
+        attrs:
+          name: "@host"
+          kind: "instance"
+          value: "Johans-MacBook-Pro.local"
+          type: "String"
+          hasChildren: "true"
+          objectId: "+0x3fd5fe240fcc"
+    }
+    {
+      variable:
+        attrs:
+          name: "@pid"
+          kind: "instance"
+          value: "26274"
+          type: "Fixnum"
+          hasChildren: "false"
+          objectId: "+0xcd45"
+    }
+    {
+      variable:
+        attrs:
+          name: "@ppid"
+          kind: "instance"
+          value: "25640"
+          type: "Fixnum"
+          hasChildren: "false"
+          objectId: "+0xc851"
+    }
+    {
+      variable:
+        attrs:
+          name: "@turd"
+          kind: "instance"
+    }
+  ]

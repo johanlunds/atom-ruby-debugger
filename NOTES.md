@@ -115,3 +115,23 @@ TODO: next up:
 * see Trello board (clean up?)
 * write more tests. Integration/feature testing structure!
 * breakpoints in gutter: https://gist.github.com/johanlunds/58519a4d630b9724167e
+
+<!-- TODO: use different colors for different types (Array, String, Fixnum, Float, TrueClass, FalseClass, NilClass, Range, Regexp, Symbol, Hash, ... more base-types) -->
+<!-- TODO: use different colors for "@inst", "local", "self", "$glob", "@@cvar", "[1]", ... (how does hash keys look?) -->
+
+
+# TODO: special case: (seems to be when it hasn't been instantiated yet = same as current row)
+<variable name="@turd" kind="instance"/>
+</variables>
+
+* css
+* css: för olika variabeltyper, klasstyper
+* css: Globals ska vara dold vid start - hur?
+* Variable docs
+* tester:
+  * funktionstest (visa träd, klicka i underträd)
+  * Client: instanceVariables
+  * Variable ?
+
+
+Nice inspiration? https://github.com/Microsoft/vscode-go#debugger

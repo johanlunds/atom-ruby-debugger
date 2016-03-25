@@ -4,6 +4,7 @@ CSON = require 'season'
 q = require 'q'
 {EventEmitter} = require 'events'
 XmlParser = require './xml-parser'
+Variable = require './variable'
 
 module.exports =
 class Client
@@ -70,6 +71,10 @@ class Client
   globalVariables: ->
     @runCmdWithResponse 'var global'
 
+  # Returns Promise
+  instanceVariables: (objectId) ->
+    @runCmdWithResponse 'var instance', objectId
+
   runCmd: (cmd, arg) ->
     if arg
       @socket.write(cmd + " " + arg + "\n")
@@ -108,12 +113,12 @@ class Client
       attrs
     @deferreds.shift().resolve(frames)
 
-  # response for 'var local', 'var global'
+  # response for 'var local', 'var global', 'var instance'
   handleVariablesCmd: (data) ->
     vars = for entry in (data.children or [])
       attrs = entry.variable.attrs
       attrs.hasChildren = attrs.hasChildren is 'true'
-      attrs
+      new Variable(attrs, this)
     @deferreds.shift().resolve(vars)
 
   # Tear down any state and detach

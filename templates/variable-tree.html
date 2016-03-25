@@ -1,0 +1,16 @@
+<span
+  class="rd-var-show-children"
+  rv-class-has-children="var.hasChildren"
+  rv-class-expanded="var.isExpanded"
+  rv-on-click="var.toggleExpanded">
+</span>
+
+<span class="rd-var-name">{ var.name }</span>
+<span class="rd-var-type">{ var.type }</span>
+<span class="rd-var-value">{ var.value }</span>
+
+<ul rv-show="var.isExpanded">
+  <li rv-each-child="var.children">
+    <rd-variable-tree var="child"></rd-variable-tree>
+  </li>
+</ul>

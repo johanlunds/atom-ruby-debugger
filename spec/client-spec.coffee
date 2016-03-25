@@ -9,6 +9,10 @@ describe "Client", ->
     @client = new Client()
     @client.socket = @socket
 
+  describe '::instanceVariables', ->
+    it "runs command 'var instance +0x3fd5fe241030'", ->
+    
+
   describe '::localVariables', ->
     beforeEach ->
       @response = CSON.readFileSync(require.resolve './fixtures/var_locals.cson')

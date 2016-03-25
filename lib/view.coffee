@@ -1,6 +1,7 @@
 rivets = require 'rivets'
 
 require './components/main-component'
+require './components/variable-tree-component'
 
 module.exports =
 class View

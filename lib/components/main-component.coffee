@@ -25,6 +25,9 @@ rivets.formatters.framePathHtml = (frame) ->
   items = parts.map((p) -> "<li>#{p}</li>").join("")
   "<ul>#{items}</ul>"
 
+rivets.formatters.isPresent = (value) ->
+  value?.length > 0
+
 module.exports =
 class MainComponent
   constructor: ({@context}) ->
