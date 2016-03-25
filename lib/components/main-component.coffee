@@ -35,6 +35,15 @@ class MainComponent
   toggleConnect: =>
     if @context.isDisconnected() then @context.connect() else @context.disconnect()
 
+  stepIn: =>
+    @context.stepIn()
+
+  stepOut: =>
+    @context.stepOut()
+
+  stepOver: =>
+    @context.stepOver()
+
   connectText: =>
     if @context.isDisconnected() then "Connect" else "Disconnect"
 

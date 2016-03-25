@@ -24,13 +24,13 @@ class DebuggerContext
 
   isConnected: =>
     not @isDisconnected()
-    
+
   isDisconnected: =>
     @state.is('disconnected')
-  
+
   isRunning: ->
     @state.is('running')
-  
+
   connect: =>
     @client
       .connect()
@@ -38,21 +38,33 @@ class DebuggerContext
       .catch (e) ->
         # most probably "Error: connect ECONNREFUSED 127.0.0.1:1234" because rdebug-ide hasn't been started
         atom.notifications.addError e.toString(), dismissable: true
-    
+
   disconnect: =>
     @client.disconnect()
-    
+
   disconnected: ->
     @state.disconnect()
-    
+
   pause: ->
     @client.pause()
+
+  stepIn: ->
+    @state.continue()
+    @client.stepIn()
+
+  stepOut: ->
+    @state.continue()
+    @client.stepOut()
+
+  stepOver: ->
+    @state.continue()
+    @client.stepOver()
 
   # TODO: when to reset @backtrace etc to be empty? look at how Chrome debugger does it. maybe write some tests
   paused: (breakpoint) ->
     @state.pause()
     atom.workspace.open(breakpoint.file, initialLine: breakpoint.line - 1)
-    
+
     q.all([
       @client.backtrace()
       @client.localVariables()
@@ -68,6 +80,6 @@ class DebuggerContext
     else
       @client.continue()
       @state.continue()
-    
+
   destroy: ->
     @client.destroy()

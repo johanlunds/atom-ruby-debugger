@@ -147,6 +147,21 @@ describe "Client", ->
       runs ->
         expect(result).toEqual({ attrs : { no : '1', location : 'fixtures/simple.rb:1' } })
 
+  describe "::stepIn", ->
+    it "runs command 'step'", ->
+      @client.stepIn()
+      expect(@socket.write).toHaveBeenCalledWith("step\n")
+
+  describe "::stepOut", ->
+    it "runs command 'finish'", ->
+      @client.stepOut()
+      expect(@socket.write).toHaveBeenCalledWith("finish\n")
+
+  describe "::stepOver", ->
+    it "runs command 'next'", ->
+      @client.stepOver()
+      expect(@socket.write).toHaveBeenCalledWith("next\n")
+
   describe "::handleCmd", ->
     describe "when suspended", ->
       beforeEach ->

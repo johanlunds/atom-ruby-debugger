@@ -49,6 +49,16 @@ class Client
     @runCmd 'start'
 
   # Returns null
+  stepIn: ->
+    @runCmd 'step'
+
+  stepOut: ->
+    @runCmd 'finish'
+
+  stepOver: ->
+    @runCmd 'next'
+
+  # Returns null
   continue: ->
     @runCmd 'cont'
 
