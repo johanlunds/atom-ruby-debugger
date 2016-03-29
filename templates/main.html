@@ -11,13 +11,13 @@
         <button class='btn play' rv-on-click="togglePlay" rv-disabled="context.isDisconnected < state.current" rv-title="playText < context.state.current">
           <span rv-class="playIconClass < context.state.current"></span>
         </button>
-        <button class='btn step-over' rv-on-click="stepOver" rv-disabled="context.isDisconnected < state.current" title="Step over">
+        <button class='btn step-over' rv-on-click="stepOver" rv-enabled="context.isPaused  < state.current" title="Step over">
           <span class="rd-icon-step-over"></span>
         </button>
-        <button class='btn step-in' rv-on-click="stepIn" rv-disabled="context.isDisconnected < state.current" title="Step in">
+        <button class='btn step-in' rv-on-click="stepIn" rv-enabled="context.isPaused < state.current" title="Step in">
           <span class="rd-icon-step-in"></span>
         </button>
-        <button class='btn step-out' rv-on-click="stepOut" rv-disabled="context.isDisconnected < state.current" title="Step out">
+        <button class='btn step-out' rv-on-click="stepOut" rv-enabled="context.isPaused  < state.current" title="Step out">
           <span class="rd-icon-step-out"></span>
         </button>
         <button class='btn deactivate' title="Deactivate breakpoints" >

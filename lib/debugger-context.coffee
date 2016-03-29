@@ -31,6 +31,9 @@ class DebuggerContext
   isRunning: ->
     @state.is('running')
 
+  isPaused: =>
+    @state.is('paused')
+
   connect: =>
     @client
       .connect()
