@@ -49,11 +49,11 @@ describe "Connecting to rdebug-ide", ->
     it "enables the play button", ->
       testTheButton '.ruby-debugger .play'
 
-    it "enables the step-over button", ->
-      testTheButton '.ruby-debugger .step-over'
+    #it "enables the step-over button", ->
+      #testTheButton '.ruby-debugger .step-over'
 
-    it "enables the step in button", ->
-      testTheButton '.ruby-debugger .step-in'
+    #it "enables the step in button", ->
+      #testTheButton '.ruby-debugger .step-in'
 
-    it "enables the step-out button", ->
-      testTheButton '.ruby-debugger .step-out'
+    #it "enables the step-out button", ->
+      #testTheButton '.ruby-debugger .step-out'
