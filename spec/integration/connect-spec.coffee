@@ -14,7 +14,7 @@ describe "Connecting to rdebug-ide", ->
   afterEach ->
     process.kill()
 
-  testTheButton = (buttonSelector) ->
+  connect = () ->
     # 1. start rdebug-ide with Ruby-script
     waitsFor "start of rdebug-ide", (done) ->
       process = startDebuggerProcess(file, done)
@@ -30,8 +30,11 @@ describe "Connecting to rdebug-ide", ->
     waitsForPromise ->
       activationPromise
 
+  testPlayButton = (buttonSelector, clickSelectors, waitsFors) ->
+    connect()
+
     runs ->
-      # 4. Play/start button should not be active
+      # 4. button should not be active
       expect(workspaceElement.querySelector(buttonSelector)).toBeDisabled()
 
       # 5. click on Connect button
@@ -41,19 +44,45 @@ describe "Connecting to rdebug-ide", ->
       workspaceElement.querySelector('.ruby-debugger .connect').textContent.trim() == 'Disconnect'
 
     runs ->
-      # 6. Start button should now be active
+      # 6. button should now be active
       expect(workspaceElement.querySelector(buttonSelector)).not.toBeDisabled()
 
+  testStepButton = (buttonSelector) ->
+    connect()
+
+    runs ->
+      expect(workspaceElement.querySelector(buttonSelector)).toBeDisabled()
+      workspaceElement.querySelector('.ruby-debugger .connect').click()
+
+    waitsFor ->
+      workspaceElement.querySelector('.ruby-debugger .connect').textContent.trim() == 'Disconnect'
+
+    runs ->
+      workspaceElement.querySelector('.ruby-debugger .play').click()
+
+    waitsFor ->
+      workspaceElement.querySelector('.ruby-debugger .play').title.trim() == "Pause"
+
+    runs ->
+      workspaceElement.querySelector('.ruby-debugger .play').click()
+
+    waitsFor ()->
+      workspaceElement.querySelector('.ruby-debugger .play').title.trim() == "Play"
+    ,""
+    ,10000
+
+    runs ->
+      expect(workspaceElement.querySelector(buttonSelector)).not.toBeDisabled()
 
   describe "when activating package and connecting to a started instance of rdebug-ide", ->
     it "enables the play button", ->
-      testTheButton '.ruby-debugger .play'
+      testPlayButton '.ruby-debugger .play'
 
-    #it "enables the step-over button", ->
-      #testTheButton '.ruby-debugger .step-over'
+    it "enables the step-over button on pause", ->
+      testStepButton '.ruby-debugger .step-over'
 
-    #it "enables the step in button", ->
-      #testTheButton '.ruby-debugger .step-in'
+    it "enables the step in button on pause", ->
+      testStepButton '.ruby-debugger .step-in'
 
-    #it "enables the step-out button", ->
-      #testTheButton '.ruby-debugger .step-out'
+    it "enables the step-out button on pause", ->
+      testStepButton '.ruby-debugger .step-out'
